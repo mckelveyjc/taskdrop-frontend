@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     // for now, each task is given a random id
+    // yee yee ! 
     createTask() {
       console.log("NEW TASK!");
       let NewTask = createApp(Task, {msg: "(new task)", id: Math.floor(Math.random() * 1000)});
