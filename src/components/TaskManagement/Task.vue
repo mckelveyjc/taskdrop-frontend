@@ -67,7 +67,8 @@ export default {
     height: 50px;
     /* width: 70%; */
     width: 250px;
-    margin-left: 35px;
+    /* margin-left: 46px; */
+    margin-left: 12%;
     display: flex;
     align-items: center;
     justify-content: center;
