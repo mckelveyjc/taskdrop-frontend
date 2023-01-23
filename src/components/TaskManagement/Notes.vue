@@ -1,7 +1,7 @@
 <template>
   <div class="notes-container">
     <h1>{{ msg }}</h1>
-    <h1 contenteditable></h1>
+    <h1 class="editable-notes" contenteditable></h1>
   </div>
 </template>
 
@@ -21,5 +21,9 @@ export default {
     border-radius: 15px;
     height: 25%;
     /* margin-top: 4px; */
+  }
+
+  .editable-notes {
+
   }
 </style>
