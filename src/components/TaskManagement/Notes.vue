@@ -1,6 +1,7 @@
 <template>
   <div class="notes-container">
     <h1>{{ msg }}</h1>
+    <h1 contenteditable></h1>
   </div>
 </template>
 

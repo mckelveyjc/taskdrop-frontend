@@ -3,21 +3,21 @@
     <h1>{{ msg }}</h1>
     <TaskManagementContainer />
     <ScheduleContainer />
-    <LeftToolBar />
+    <!-- <LeftToolBar /> -->
   </div>
 </template>
 
 <script>
 import TaskManagementContainer from './TaskManagement/TaskManagementContainer.vue';
 import ScheduleContainer from './Schedule/ScheduleContainer.vue';
-import LeftToolBar from './ToolBar/LeftToolBar.vue';
+// import LeftToolBar from './ToolBar/LeftToolBar.vue';
 
 export default {
   name: 'ToDoList',
   components: {
     TaskManagementContainer,
     ScheduleContainer,
-    LeftToolBar,
+    // LeftToolBar,
   },
 }
 </script>

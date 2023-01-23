@@ -23,7 +23,7 @@ export default {
     // for now, each task is given a random id
     // yee yee ! 
     createTask() {
-      console.log("NEW TASK! (yee yee)");
+      console.log("NEW TASK! (yee yeeeeee)");
       let NewTask = createApp(Task, {msg: "(new task)", id: Math.floor(Math.random() * 1000)});
       const wrapper = document.createElement("div");
       NewTask.mount(wrapper);
