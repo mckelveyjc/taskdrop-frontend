@@ -5,19 +5,19 @@
     <form v-on:submit.prevent="onSubmit">
       <span>username</span><br>
       <input 
-        v-model="userName"
+        v-model="dataentry.userName"
         type="text"
         placeholder="userName" 
       /><br>
       <span>email</span><br>
       <input 
-        v-model="email"
+        v-model="dataentry.email"
         type="email"
         placeholder="email" 
       /><br>
       <span>password</span><br>
       <input 
-        v-model="password"
+        v-model="dataentry.password"
         type="password"
         placeholder="password" 
       /><br>
