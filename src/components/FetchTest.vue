@@ -11,9 +11,9 @@
       /><br>
       <span>username</span><br>
       <input 
-        v-model="name"
+        v-model="userName"
         type="text"
-        placeholder="username" 
+        placeholder="userName" 
       /><br>
       <span>password</span><br>
       <input 
@@ -41,10 +41,9 @@
     data() {
       return {
         dataentry: {
-          email: "cat@cat",
-          username: "",
-          password: "",
-          formSubmitted: false
+          userName: "",
+          email: "",
+          password: ""
         }
       };
     },
