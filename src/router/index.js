@@ -2,7 +2,8 @@ import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router'
 
 const routes = [
     {
-        path: "/157.230.93.52/vue-app/dist/",
+        // path: "/157.230.93.52/vue-app/dist/",
+        path: "/",
         name: "ToDoList",
           component: () => import(
             /* webpackChunkName: "ToDoList" */ '../components/ToDoList.vue')
