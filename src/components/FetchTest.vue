@@ -3,17 +3,17 @@
     <!-- <form @submit="submitForm" v-if="!formSubmitted"> -->
     <!-- <form @submit="submit"> -->
     <form v-on:submit.prevent="onSubmit">
-      <span>email</span><br>
-      <input 
-        v-model="email"
-        type="email"
-        placeholder="email" 
-      /><br>
       <span>username</span><br>
       <input 
         v-model="userName"
         type="text"
         placeholder="userName" 
+      /><br>
+      <span>email</span><br>
+      <input 
+        v-model="email"
+        type="email"
+        placeholder="email" 
       /><br>
       <span>password</span><br>
       <input 
@@ -41,9 +41,9 @@
     data() {
       return {
         dataentry: {
-          userName: "",
-          email: "",
-          password: ""
+          "userName": "",
+          "email": "",
+          "password": ""
         }
       };
     },
