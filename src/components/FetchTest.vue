@@ -51,8 +51,8 @@
       onSubmit:function(){
         const path = 'http://157.230.93.52/register-user'
         axios.post(path, {
+          userName:this.dataentry.userName,
           email:this.dataentry.email,
-          username:this.dataentry.username,
           password:this.dataentry.password,
         })
         .then(response => {
