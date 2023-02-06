@@ -8,6 +8,7 @@ const routes = [
             /* webpackChunkName: "AllBreweries" */ '../components/ToDoList.vue')
     },
     {
+      // path: "/fetch-test",
       path: "/fetch-test",
       name: "FetchTest",
         component: () => import(

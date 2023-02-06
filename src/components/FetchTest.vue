@@ -1,12 +1,140 @@
 <template>
-<div class="field">
-  <label class="label">Message</label>
-  <div class="control">
-    <textarea class="textarea" v-model="form.message"></textarea>
+  <div>
+    <form @submit="submitForm" v-if="!formSubmitted">
+      <span>username</span><br>
+      <input 
+        v-model="name"
+        type="text"
+        placeholder="username" 
+      /><br>
+      <span>password</span><br>
+      <input 
+        v-model="password"
+        type="password"
+        placeholder="password" 
+      /><br>
+      <input 
+        class="submit" 
+        type="submit" 
+        value="Submit"
+      >
+    </form>
+    <div v-if="formSubmitted">
+      <h3>Form Submitted</h3>
+      <p>Name: {{ name }}</p>
+      <p>Password: {{ password }}</p>
+      <small>Click on run to launch the app again.</small>
+    </div>
   </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        name: "",
+        password: "",
+        formSubmitted: false
+      };
+    },
+    methods:{
+      submitForm:function(){
+        const path = 'http://127.0.0.1:5000/dataentry'
+        axios.post(path, {
+          name:this.dataentry.name,
+          password:this.dataentry.password,
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err =>{
+          console.log(err);
+        });
+      },
+    }
+  };
+</script>
+<style>
+  form {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+
+  input {
+    padding: 4px 8px;
+    margin: 4px;
+  }
+
+  span {
+    font-size: 18px;
+    margin: 4px;
+    font-weight: 500;
+  }
+
+  .submit {
+    font-size: 15px;
+    color: #fff;
+    background: #222;
+    padding: 6px 12px;
+    border: none;
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+</style>
+
+<!-- <template>
+<div class="field">
+  <form @submit="submit">
+<form-group id="input-group-1" label="Name" label-for="input-1">
+<form-textarea
+id="input-1"
+type="text"
+v-model="dataentry.name"
+placeholder="Enter the Name"
+></form-textarea>
+</form-group>
+<form-group id="input-group-2" label="Department" label-for="input-2">
+<form-textarea
+id="input-2"
+type="text"
+v-model="dataentry.department"
+placeholder="Type your Department here">
+</form-textarea>
+</form-group>
+<button pill v-on:Click="submit" id="button-1" type="submit" variant="dark">Submit</button>
+</form>
 </div>
   </template>
-  <script></script>
+  <script>
+  import axios from 'axios';
+  export default {
+    data(){
+      return {
+        dataentry:{
+        name:"",
+        department:"",
+        },
+      };
+    },
+    methods:{
+      submit:function(){
+        const path = 'http://127.0.0.1:5000/dataentry'
+        axios.post(path, {
+          name:this.dataentry.name,
+          department:this.dataentry.department,
+        })
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err =>{
+          console.log(err);
+        });
+      },
+    }
+  }
+  </script>
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
@@ -47,4 +175,4 @@
   font-size: 20px;
   color:white;
   }
-  </style>
+  </style> -->
