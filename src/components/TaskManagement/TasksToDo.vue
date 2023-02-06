@@ -9,6 +9,17 @@
     <!-- <Task msg="Task #2" completed=False id="2"></Task> -->
     <Task v-bind="updatedProps" v-if="onThisDay"></Task>
     <AddTask msg="Add Task" completed=False id="add-task-btn"></AddTask>
+    <!-- added the below to test router -->
+    <router-link
+      to="/fetch-test"
+      custom
+      v-slot="{ navigate }">
+      <button
+        @click="navigate"
+        role="link">
+        Fetch Test
+      </button>
+    </router-link>
   </div>
 </template>
 
