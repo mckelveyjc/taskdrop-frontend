@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, createMemoryHistory } from 'vue-router';
 
 const routes = [
     {
         path: "/",
         name: "ToDoList",
           component: () => import(
-            /* webpackChunkName: "AllBreweries" */ '../components/ToDoList.vue')
+            /* webpackChunkName: "ToDoList" */ '../components/ToDoList.vue')
     },
     {
       // path: "/fetch-test",
@@ -17,7 +17,9 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  // history: VueRouter.createWebHashHistory(),
+  // history: createWebHistory(),
+  history: createMemoryHistory(),
   routes
 })
 

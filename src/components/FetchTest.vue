@@ -1,6 +1,12 @@
 <template>
   <div>
     <form @submit="submitForm" v-if="!formSubmitted">
+      <span>email</span><br>
+      <input 
+        v-model="email"
+        type="email"
+        placeholder="email" 
+      /><br>
       <span>username</span><br>
       <input 
         v-model="name"
@@ -31,16 +37,18 @@
   export default {
     data() {
       return {
-        name: "",
+        email: "",
+        username: "",
         password: "",
         formSubmitted: false
       };
     },
     methods:{
       submitForm:function(){
-        const path = 'http://127.0.0.1:5000/dataentry'
+        const path = 'http://157.230.93.52/register-user'
         axios.post(path, {
-          name:this.dataentry.name,
+          email:this.dataentry.email,
+          username:this.dataentry.username,
           password:this.dataentry.password,
         })
         .then(response => {
