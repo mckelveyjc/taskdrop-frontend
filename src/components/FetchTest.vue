@@ -1,6 +1,8 @@
 <template>
   <div>
-    <form @submit="submitForm" v-if="!formSubmitted">
+    <!-- <form @submit="submitForm" v-if="!formSubmitted"> -->
+    <!-- <form @submit="submit"> -->
+    <form v-on:submit.prevent="onSubmit">
       <span>email</span><br>
       <input 
         v-model="email"
@@ -25,26 +27,29 @@
         value="Submit"
       >
     </form>
-    <div v-if="formSubmitted">
+    <!-- <div v-if="formSubmitted">
       <h3>Form Submitted</h3>
       <p>Name: {{ name }}</p>
       <p>Password: {{ password }}</p>
       <small>Click on run to launch the app again.</small>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
+  import axios from 'axios';
   export default {
     data() {
       return {
-        email: "",
-        username: "",
-        password: "",
-        formSubmitted: false
+        dataentry: {
+          email: "cat@cat",
+          username: "",
+          password: "",
+          formSubmitted: false
+        }
       };
     },
     methods:{
-      submitForm:function(){
+      onSubmit:function(){
         const path = 'http://157.230.93.52/register-user'
         axios.post(path, {
           email:this.dataentry.email,
