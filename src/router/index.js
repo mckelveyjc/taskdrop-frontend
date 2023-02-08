@@ -18,8 +18,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  // history: createWebHistory(),
-  history: createMemoryHistory(),
+  history: createWebHistory(process.env.BASE_URL),
+  // history: createMemoryHistory(),
   routes
 })
 
