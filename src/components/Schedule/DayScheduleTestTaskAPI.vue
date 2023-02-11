@@ -85,7 +85,7 @@ export default {
         // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
         // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
         // test if we can send a fetch request from inside onDrop (I don't see why we wouldn't be able to)
-        // let's use authenticate-user for fun
+        // let's use get-tasks for fun
         const path = 'http://157.230.93.52/get-tasks'
         axios.post(path, {})
         .then(response => {
