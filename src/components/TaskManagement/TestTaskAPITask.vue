@@ -6,7 +6,7 @@
       <h1
         contenteditable
         @input="updateContent($event)">
-          {{ taskInfoArray[2] }} 
+          {{ this.taskInfoArray[2] }} 
       </h1>
     </div>
   </template>
@@ -21,6 +21,7 @@
       completed: Boolean,
       id: Number,
       taskInfoObject: Object
+      // above looks like this: [ 4, 1, "task #1", "testday", "10:00", "11:30" ]
     },
     created() {
         this.logTasks()
@@ -43,8 +44,10 @@
         startDrag(evt) {
             console.log("drag started");
             evt.dataTransfer.setData('text/plain', evt.target.id);
-            evt.dataTransfer.setData('task-name', this.msg);
-            evt.dataTransfer.setData('task-id', this.id);
+            // evt.dataTransfer.setData('task-name', this.msg);
+            // evt.dataTransfer.setData('task-id', this.id);
+            evt.dataTransfer.setData('task-name', this.taskInfoArray[2]);
+            evt.dataTransfer.setData('task-id', this.taskInfoArray[0]);
             setTimeout(() => { 
                 evt.target.style.display = "none";
             }, 0);

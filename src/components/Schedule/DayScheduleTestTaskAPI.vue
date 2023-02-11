@@ -6,10 +6,11 @@
     @dragenter.prevent 
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
-        <Task v-bind="updatedProps" v-if="onThisDay"></Task>
+        <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
         <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
             <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
+        <!-- <TestTaskAPITask v-bind="updatedProps" v-if="onThisDay"></TestTaskAPITask> -->
         <!-- fix the below if enough time -->
         <!-- <div>
           <hr class="day-schedule-division" id="first-division">
@@ -71,29 +72,39 @@ export default {
     onDrop(evt) {
       // get task name and id number
       const taskName = evt.dataTransfer.getData('task-name');  
-      const taskID = evt.dataTransfer.getData('task-id');    
-      // console.log("ID from dropped task: " + taskID);
+      const taskID = evt.dataTransfer.getData('task-id');  
+      console.log("name of dropped task: " + taskName);
+      console.log("ID from dropped task: " + taskID);
 
+      var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
+      const wrapper2 = document.createElement("div");
+      NewTask.mount(wrapper2);
+      evt.target.appendChild(wrapper2);
+
+      // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
+      // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
+
+      // gonna remove this whole block soon:
       // create a new task with that name and id number
       // put the task in a div wrapper and add it to the dom
-      let storedTasks2 = JSON.parse(localStorage.getItem("tasks"));
+    //   let storedTasks2 = JSON.parse(localStorage.getItem("tasks"));
       // console.log("stored tasks 2 name:");
       // console.log(storedTasks2[taskID]);
       // console.log("taskID type: " + typeof(taskID));
 
-      if (storedTasks2 == null || !(taskID in storedTasks2)){
-        console.log("NOT IN THERE!");
-        var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
-      }
-      else {
-        let newTaskName = storedTasks2[taskID][0];
-        var NewTask = createApp(Task, {msg: newTaskName, id: parseInt(taskID)});
-      }
+    //   if (storedTasks2 == null || !(taskID in storedTasks2)){
+    //     console.log("NOT IN THERE!");
+    //     var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
+    //   }
+    //   else {
+    //     let newTaskName = storedTasks2[taskID][0];
+    //     var NewTask = createApp(Task, {msg: newTaskName, id: parseInt(taskID)});
+    //   }
 
       // let NewTask = createApp(Task, {msg: taskName, id: taskID});
-      const wrapper = document.createElement("div");
-      NewTask.mount(wrapper);
-      evt.target.appendChild(wrapper);
+    //   const wrapper = document.createElement("div");
+    //   NewTask.mount(wrapper);
+    //   evt.target.appendChild(wrapper);
 
       // localStorage looks like this: {
       //  tasks: {
@@ -109,29 +120,29 @@ export default {
       // let's add the dropped task into the structure:
       //   1. if localStorage is null, create a structure:
       // localStorage.clear();
-      if (localStorage.getItem("tasks") == null){
-        console.log("localStorage is null!");
-        let localStorageSample = {0: ["sampleTaskName", "sampleTaskLocation", false]};
-        localStorage.setItem("tasks", JSON.stringify(localStorageSample));
-      }
+    //   if (localStorage.getItem("tasks") == null){
+    //     console.log("localStorage is null!");
+    //     let localStorageSample = {0: ["sampleTaskName", "sampleTaskLocation", false]};
+    //     localStorage.setItem("tasks", JSON.stringify(localStorageSample));
+    //   }
       //  2. look for the task's id in local storage. if it's there, delete it!
-      else {
-        // could make this a global variable instead of parsing so many times
-        let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-        // probably a better way to do this
-        for (const [key, value] of Object.entries(storedTasks)) {
-          if (key == taskID) {
-            delete storedTasks[key];
-            console.log(key, value);
-          }
-        }
-      }
+    //   else {
+    //     // could make this a global variable instead of parsing so many times
+    //     let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    //     // probably a better way to do this
+    //     for (const [key, value] of Object.entries(storedTasks)) {
+    //       if (key == taskID) {
+    //         delete storedTasks[key];
+    //         console.log(key, value);
+    //       }
+    //     }
+    //   }
 
       //  3. now that you know you have a structure, add the dropped item to it
-      let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-      console.log(storedTasks);
-      storedTasks[taskID] = [taskName, this.dayName, true];
-      localStorage.setItem("tasks", JSON.stringify(storedTasks));
+    //   let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    //   console.log(storedTasks);
+    //   storedTasks[taskID] = [taskName, this.dayName, true];
+    //   localStorage.setItem("tasks", JSON.stringify(storedTasks));
 
       // let storedTasksTest = JSON.parse(localStorage.getItem("tasks"));
       // console.log("task test: ");
