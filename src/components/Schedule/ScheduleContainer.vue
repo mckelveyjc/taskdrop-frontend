@@ -20,7 +20,7 @@
     <!-- <div v-for="task in taskList">
       {{ task }}
     </div> -->
-    <DayScheduleTestTaskAPI dayName="Testday"/>
+    <DayScheduleTestTaskAPI dayName="Testday" :taskList="taskList"/>
     <DaySchedule dayName="Monday"/>
     <DaySchedule dayName="Tuesday"/>
     <DaySchedule dayName="Wednesday"/>
@@ -41,6 +41,11 @@ export default {
   created() {
     this.logTasks()
   },
+  methods:{
+      logTasks() {
+        // console.log("taskList: " + this.taskList)
+      }
+  },
   components: {
     DaySchedule,
     // below added for testing
@@ -49,11 +54,6 @@ export default {
   props: [
     "taskList"
   ],
-  methods:{
-      logTasks() {
-        console.log(this.taskList)
-      }
-  },
 }
 </script>
 

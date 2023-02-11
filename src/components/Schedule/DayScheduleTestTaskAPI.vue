@@ -7,6 +7,10 @@
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
         <Task v-bind="updatedProps" v-if="onThisDay"></Task>
+        <!-- <div v-for="task in taskList['testdayTasks']"> -->
+        <div v-for="task in taskList[dayName.toLowerCase() + 'Tasks']">
+            {{ task }}
+        </div>
         <!-- fix the below if enough time -->
         <!-- <div>
           <hr class="day-schedule-division" id="first-division">
@@ -32,13 +36,22 @@ import { createApp } from "vue"
 // let's put rendered: true or false into the task local storage data structure
 export default {
   name: 'DayScheduleTestTaskAPI',
+  // below is testing
+//   created() {
+//     this.logTasks()
+//   },
   props: {
       dayName: String,
+      taskList: Array
   },
   components: {
     Task
   },
   methods: {
+    // testing
+    // logTasks() {
+    //     console.log("day schedule test task api tasks: " + this.taskList["mondayTasks"])
+    // },
     // this one works:
     // onDrop(evt) {
     //   const taskName = evt.dataTransfer.getData('task-name');     
