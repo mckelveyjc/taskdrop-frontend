@@ -1,4 +1,4 @@
-// this component will hold the days & a list of times on the left 
+<!-- this component will hold the days & a list of times on the left  -->
 <template>
   <div class="schedule-container">
     <!-- <div class="timings-container"> -->
@@ -16,6 +16,11 @@
       <p>5PM</p> <br> -->
       <!-- <p>6PM</p> <br> -->
     <!-- </div> -->
+    <!-- added the below day for testing -->
+    <!-- <div v-for="task in taskList">
+      {{ task }}
+    </div> -->
+    <DayScheduleTestTaskAPI dayName="Testday"/>
     <DaySchedule dayName="Monday"/>
     <DaySchedule dayName="Tuesday"/>
     <DaySchedule dayName="Wednesday"/>
@@ -28,12 +33,27 @@
 
 <script>
 import DaySchedule from './DaySchedule.vue';
+// imported the below for testing
+import DayScheduleTestTaskAPI from './DayScheduleTestTaskAPI.vue';
 
 export default {
   name: 'ScheduleContainer',
+  created() {
+    this.logTasks()
+  },
   components: {
-    DaySchedule
-  }
+    DaySchedule,
+    // below added for testing
+    DayScheduleTestTaskAPI
+  },
+  props: [
+    "taskList"
+  ],
+  methods:{
+      logTasks() {
+        console.log(this.taskList)
+      }
+  },
 }
 </script>
 
