@@ -83,6 +83,7 @@ export default {
 
       // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
       // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
+      
 
       // gonna remove this whole block soon:
       // create a new task with that name and id number
