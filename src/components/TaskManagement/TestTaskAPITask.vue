@@ -6,8 +6,7 @@
       <h1
         contenteditable
         @input="updateContent($event)">
-          {{ msg }}
-          {{ taskInfoArray1[2] }}
+          {{ taskInfoArray[2] }} 
       </h1>
     </div>
   </template>
@@ -21,22 +20,22 @@
       msg: String,
       completed: Boolean,
       id: Number,
-      taskInfoArray: Object
+      taskInfoObject: Object
     },
     created() {
         this.logTasks()
     },
     data() {
       return {
-        taskInfoArray1: Array
+        taskInfoArray: Array
       };
     },
     methods: {
         // testing
         logTasks() {
-            if (this.taskInfoArray != undefined){
+            if (this.taskInfoObject != undefined){
                 // this.taskInfoArray = Object.values(this.taskInfoArray)
-                this.taskInfoArray1 = Object.values(this.taskInfoArray)
+                this.taskInfoArray = Object.values(this.taskInfoObject)
                 // console.log("test task api task log: " + Object.values(this.taskInfoArray))
                 // console.log("test task api task log: " + Object.values(this.taskInfoArray)[2])
             }

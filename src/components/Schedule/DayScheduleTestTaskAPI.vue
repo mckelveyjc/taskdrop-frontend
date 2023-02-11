@@ -7,12 +7,8 @@
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
         <Task v-bind="updatedProps" v-if="onThisDay"></Task>
-        <TestTaskAPITask msg=""></TestTaskAPITask>
-        <div v-for="task in taskList[dayName.toLowerCase() + 'Tasks']">
-            {{ task }}
-        </div>
-        <div v-for="taskInfoArray in taskList[dayName.toLowerCase() + 'Tasks']">
-            <TestTaskAPITask :taskInfoArray=taskInfoArray></TestTaskAPITask>
+        <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
+            <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
         <!-- fix the below if enough time -->
         <!-- <div>

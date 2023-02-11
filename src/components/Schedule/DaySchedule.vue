@@ -6,6 +6,7 @@
     @dragenter.prevent 
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
+        <!-- this is how it was before! -->
         <Task v-bind="updatedProps" v-if="onThisDay"></Task>
         <!-- fix the below if enough time -->
         <!-- <div>

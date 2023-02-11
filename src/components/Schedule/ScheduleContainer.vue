@@ -21,13 +21,21 @@
       {{ task }}
     </div> -->
     <DayScheduleTestTaskAPI dayName="Testday" :taskList="taskList"/>
-    <DaySchedule dayName="Monday"/>
-    <DaySchedule dayName="Tuesday"/>
-    <DaySchedule dayName="Wednesday"/>
-    <DaySchedule dayName="Thursday"/>
-    <DaySchedule dayName="Friday"/>
-    <DaySchedule dayName="Saturday"/>
-    <DaySchedule dayName="Sunday"/>
+    <DayScheduleTestTaskAPI dayName="Monday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Tuesday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Wednesday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Thursday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Friday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Saturday" :taskList="taskList"/>
+    <DayScheduleTestTaskAPI dayName="Sunday" :taskList="taskList"/>
+
+    <!-- <DaySchedule dayName="Monday" :taskList="taskList"/>
+    <DaySchedule dayName="Tuesday" :taskList="taskList"/>
+    <DaySchedule dayName="Wednesday" :taskList="taskList"/>
+    <DaySchedule dayName="Thursday" :taskList="taskList"/>
+    <DaySchedule dayName="Friday" :taskList="taskList"/>
+    <DaySchedule dayName="Saturday" :taskList="taskList"/>
+    <DaySchedule dayName="Sunday" :taskList="taskList"/> -->
   </div>
 </template>
 
