@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Task from '../TaskManagement/Task.vue';
 import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
 import { createApp } from "vue"
@@ -70,89 +71,29 @@ export default {
     //   console.log("Day: " + lsDayName);
     // },
     onDrop(evt) {
-      // get task name and id number
-      const taskName = evt.dataTransfer.getData('task-name');  
-      const taskID = evt.dataTransfer.getData('task-id');  
-      console.log("name of dropped task: " + taskName);
-      console.log("ID from dropped task: " + taskID);
+        // get task name and id number
+        const taskName = evt.dataTransfer.getData('task-name');  
+        const taskID = evt.dataTransfer.getData('task-id');  
+        console.log("name of dropped task: " + taskName);
+        console.log("ID from dropped task: " + taskID);
 
-      var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
-      const wrapper2 = document.createElement("div");
-      NewTask.mount(wrapper2);
-      evt.target.appendChild(wrapper2);
+        var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
+        const wrapper2 = document.createElement("div");
+        NewTask.mount(wrapper2);
+        evt.target.appendChild(wrapper2);
 
-      // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
-      // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
-      
-
-      // gonna remove this whole block soon:
-      // create a new task with that name and id number
-      // put the task in a div wrapper and add it to the dom
-    //   let storedTasks2 = JSON.parse(localStorage.getItem("tasks"));
-      // console.log("stored tasks 2 name:");
-      // console.log(storedTasks2[taskID]);
-      // console.log("taskID type: " + typeof(taskID));
-
-    //   if (storedTasks2 == null || !(taskID in storedTasks2)){
-    //     console.log("NOT IN THERE!");
-    //     var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
-    //   }
-    //   else {
-    //     let newTaskName = storedTasks2[taskID][0];
-    //     var NewTask = createApp(Task, {msg: newTaskName, id: parseInt(taskID)});
-    //   }
-
-      // let NewTask = createApp(Task, {msg: taskName, id: taskID});
-    //   const wrapper = document.createElement("div");
-    //   NewTask.mount(wrapper);
-    //   evt.target.appendChild(wrapper);
-
-      // localStorage looks like this: {
-      //  tasks: {
-      //    task-id: [taskName, taskLocation],
-      //    task-id: [taskName, taskLocation]
-      //  }
-      // }
-
-      // lets go ahead and see what's in there:
-      // let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-      // console.log("task list that's in localStorage: " + storedTasks);
-      
-      // let's add the dropped task into the structure:
-      //   1. if localStorage is null, create a structure:
-      // localStorage.clear();
-    //   if (localStorage.getItem("tasks") == null){
-    //     console.log("localStorage is null!");
-    //     let localStorageSample = {0: ["sampleTaskName", "sampleTaskLocation", false]};
-    //     localStorage.setItem("tasks", JSON.stringify(localStorageSample));
-    //   }
-      //  2. look for the task's id in local storage. if it's there, delete it!
-    //   else {
-    //     // could make this a global variable instead of parsing so many times
-    //     let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-    //     // probably a better way to do this
-    //     for (const [key, value] of Object.entries(storedTasks)) {
-    //       if (key == taskID) {
-    //         delete storedTasks[key];
-    //         console.log(key, value);
-    //       }
-    //     }
-    //   }
-
-      //  3. now that you know you have a structure, add the dropped item to it
-    //   let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-    //   console.log(storedTasks);
-    //   storedTasks[taskID] = [taskName, this.dayName, true];
-    //   localStorage.setItem("tasks", JSON.stringify(storedTasks));
-
-      // let storedTasksTest = JSON.parse(localStorage.getItem("tasks"));
-      // console.log("task test: ");
-      // console.log(storedTasksTest);
-
-      // perfect! we've got our localStorage set up nicely to update on drop
-      // now lets make our days render tasks using localStorage 
-      // after that, we'll set up localStorage to work with tasks-todo and completed tasks
-      // (eventually) if the task is already in the structure, let's update it 
+        // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
+        // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
+        // test if we can send a fetch request from inside onDrop (I don't see why we wouldn't be able to)
+        // let's use authenticate-user for fun
+        const path = 'http://157.230.93.52/get-tasks'
+        axios.post(path, {})
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        });
     },
   },
   computed: {

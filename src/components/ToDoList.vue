@@ -42,12 +42,6 @@ export default {
   },
   methods:{
       async getTasks(){
-        // const getTasksPath = "http://157.230.93.52/get-tasks"
-        // const initalResponse = await fetch(getTasksPath);
-        // const tasksResponse = await initalResponse.json();
-        // this.taskList = tasksResponse;
-        // console.log(tasksResponse)
-
         const path = 'http://157.230.93.52/get-tasks'
         await axios.post(path, {})
         .then(response => {
