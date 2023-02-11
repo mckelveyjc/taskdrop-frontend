@@ -7,9 +7,12 @@
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
         <Task v-bind="updatedProps" v-if="onThisDay"></Task>
-        <!-- <div v-for="task in taskList['testdayTasks']"> -->
+        <TestTaskAPITask msg=""></TestTaskAPITask>
         <div v-for="task in taskList[dayName.toLowerCase() + 'Tasks']">
             {{ task }}
+        </div>
+        <div v-for="taskInfoArray in taskList[dayName.toLowerCase() + 'Tasks']">
+            <TestTaskAPITask :taskInfoArray=taskInfoArray></TestTaskAPITask>
         </div>
         <!-- fix the below if enough time -->
         <!-- <div>
@@ -30,6 +33,7 @@
 
 <script>
 import Task from '../TaskManagement/Task.vue';
+import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
 import { createApp } from "vue"
 
 // what do we need to load in two tasks at once? 
@@ -42,10 +46,12 @@ export default {
 //   },
   props: {
       dayName: String,
-      taskList: Array
+      taskList: Object
   },
   components: {
-    Task
+    Task,
+    // below added for testing
+    TestTaskAPITask
   },
   methods: {
     // testing
