@@ -12,7 +12,7 @@
   </template>
   
   <script>
-  // const msgText = "Task #1";
+  import debounce from 'lodash.debounce'
   
   export default {
     name: 'TestTaskAPITask',
@@ -53,13 +53,9 @@
             }, 0);
         },
         // I'll use debounce here to make sure we don't send too many requests to the server!
-        updateContent(evt) {
-          const inputText = evt.target.innerText;
-          console.log(inputText);
-          setTimeout(() => {
-            console.log("cat");
-          }, 3000)
-        },
+        updateContent: debounce(() => {
+          console.log("API REQUEST")
+        }, 500)
     },
   }
   </script>
