@@ -76,6 +76,7 @@ export default {
         const taskID = evt.dataTransfer.getData('task-id');  
         console.log("name of dropped task: " + taskName);
         console.log("ID from dropped task: " + taskID);
+        console.log("day name: " + this.dayName);
 
         var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
         const wrapper2 = document.createElement("div");
@@ -86,14 +87,14 @@ export default {
         // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
         // test if we can send a fetch request from inside onDrop (I don't see why we wouldn't be able to)
         // let's use get-tasks for fun
-        const path = 'http://157.230.93.52/get-tasks'
-        axios.post(path, {})
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err =>{
-            console.log(err);
-        });
+        // const path = 'http://157.230.93.52/get-tasks'
+        // axios.post(path, {})
+        // .then(response => {
+        //     console.log(response);
+        // })
+        // .catch(err =>{
+        //     console.log(err);
+        // });
     },
   },
   computed: {
