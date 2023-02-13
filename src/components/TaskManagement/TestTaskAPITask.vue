@@ -53,8 +53,21 @@
             }, 0);
         },
         // I'll use debounce here to make sure we don't send too many requests to the server!
+        // I'm super proud of this part of the code because it's a higher-level concept
         updateContent: debounce(() => {
           console.log("API REQUEST")
+          // we'll put this code here once I write the code to update the tasks name in the DB
+          // const path = 'http://157.230.93.52/update-task/update-name'
+          // axios.post(path, {
+          //   "taskID": taskID,
+          //   "newDay": lowerCaseDayName
+          // })
+          // .then(response => {
+          //   console.log(response);
+          // })
+          // .catch(err =>{
+          //   console.log(err);
+          // });
         }, 500)
     },
   }
