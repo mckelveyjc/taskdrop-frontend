@@ -52,22 +52,13 @@
                 evt.target.style.display = "none";
             }, 0);
         },
+        // I'll use debounce here to make sure we don't send too many requests to the server!
         updateContent(evt) {
-        // this works:
-        // const inputText = evt.target.innerText;
-        // localStorage.setItem("lsTaskName", inputText);
-        // this.msg = inputText;
-  
-        // so what we need to do here is change the msg and the data in the dict
-        const inputText = evt.target.innerText;
-        let storedTasks = JSON.parse(localStorage.getItem("tasks"));
-        let editedTaskID = this.id;
-        storedTasks[editedTaskID][0] = inputText;
-        localStorage.setItem("tasks", JSON.stringify(storedTasks));
-  
-        let storedTasksTest = JSON.parse(localStorage.getItem("tasks"));
-        console.log("stored task test:");
-        console.log(storedTasksTest);
+          const inputText = evt.target.innerText;
+          console.log(inputText);
+          setTimeout(() => {
+            console.log("cat");
+          }, 3000)
         },
     },
   }
