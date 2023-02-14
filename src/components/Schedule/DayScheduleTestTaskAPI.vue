@@ -10,6 +10,10 @@
         <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
             <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
+        <div v-if="renderThis">
+          <!-- <h1>Wawa Weewoo WAYNE!</h1> -->
+            <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+        </div>
         <!-- <TestTaskAPITask v-bind="updatedProps" v-if="onThisDay"></TestTaskAPITask> -->
         <!-- fix the below if enough time -->
         <!-- <div>
@@ -51,6 +55,16 @@ export default {
     // below added for testing
     TestTaskAPITask
   },
+  created() {
+        this.renderThis = false;
+        this.draggedTaskInfoObject = {};
+    },
+  data() {
+      return {
+        renderThis: Boolean,
+        draggedTaskInfoObject: Object
+      };
+    },
   methods: {
     // testing
     // logTasks() {
@@ -71,20 +85,39 @@ export default {
     //   console.log("Day: " + lsDayName);
     // },
     onDrop(evt) {
+        this.renderThis = true;
         // get task name and id number
+        // const data = evt.dataTransfer.getData("text");
+        // console.log("data: " + data);
+
         const taskName = evt.dataTransfer.getData('task-name');  
         const taskID = evt.dataTransfer.getData('task-id');
+        const taskInfoObject = evt.dataTransfer.getData('task-info-object');
         const lowerCaseDayName = this.dayName.toLowerCase();
+        this.draggedTaskInfoObject = taskInfoObject.split(",");
+        console.log("type of taskInfoObject: " + typeof(taskInfoObject));
+        console.log("type of draggedTaskInfoObject: " + typeof(this.draggedTaskInfoObject));
+
+        // console.log("name of dropped task: " + taskName);
+        // console.log("ID from dropped task: " + taskID);
+        // console.log("day name: " + this.dayName);
+        console.log("task info object as a string: " + taskInfoObject);
+        console.log("task info object as an array: " + taskInfoObject.split(","));
+        console.log("type of task info object as an array: " + typeof(taskInfoObject.split(",")));
+
+        // var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
+        // const wrapper2 = document.createElement("div");
+        // NewTask.mount(wrapper2);
+        // evt.target.appendChild(wrapper2);
+
+        // need to pass :taskInfoObject=taskInfoObject into the task
+        // var testTaskInfoObject = [ 4, 1, "task #1", "testday", "10:00", "11:30" ]
+        // var TestTaskAPITask = createApp(TestTaskAPITask, {taskInfoObject: taskInfoObject});
+        // var TestTaskAPITask = createApp(TestTaskAPITask, {msg: taskName, id: parseInt(taskID)});
+        // const wrapper3 = document.createElement("div");
+        // TestTaskAPITask.mount(wrapper3);
+        // evt.target.appendChild(wrapper3);
         
-        console.log("name of dropped task: " + taskName);
-        console.log("ID from dropped task: " + taskID);
-        console.log("day name: " + this.dayName);
-
-        var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
-        const wrapper2 = document.createElement("div");
-        NewTask.mount(wrapper2);
-        evt.target.appendChild(wrapper2);
-
         // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
         // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
         // test if we can send a fetch request from inside onDrop (I don't see why we wouldn't be able to)

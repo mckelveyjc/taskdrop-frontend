@@ -17,10 +17,10 @@
   export default {
     name: 'TestTaskAPITask',
     props: {
-      msg: String,
-      completed: Boolean,
-      id: Number,
-      taskInfoObject: Object
+      // msg: String,
+      // completed: Boolean,
+      // id: Number,
+      taskInfoObject: Object | Array
       // above looks like this: [ 4, 1, "task #1", "testday", "10:00", "11:30" ]
     },
     created() {
@@ -28,7 +28,7 @@
     },
     data() {
       return {
-        taskInfoArray: Array
+        taskInfoArray: Array,
       };
     },
     methods: {
@@ -48,6 +48,7 @@
             // evt.dataTransfer.setData('task-id', this.id);
             evt.dataTransfer.setData('task-name', this.taskInfoArray[2]);
             evt.dataTransfer.setData('task-id', this.taskInfoArray[0]);
+            evt.dataTransfer.setData('task-info-object', this.taskInfoObject);
             setTimeout(() => { 
                 evt.target.style.display = "none";
             }, 0);
