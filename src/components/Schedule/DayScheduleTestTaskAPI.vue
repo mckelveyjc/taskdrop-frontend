@@ -12,7 +12,21 @@
         <div v-if="renderDraggedTask">          
           <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
         </div>
-        <!-- fix the below if enough time -->
+        <div class="timings-container">
+          <div class="time-division">
+            <p class="time-marker">10AM</p><span class="time-division-line"></span>
+          </div>
+          <br>
+          <div class="time-division">
+            <p class="time-marker">11AM</p><span class="time-division-line"></span>
+          </div>
+          <br>
+          <div class="time-division">
+            <p class="time-marker">12PM</p><span class="time-division-line"></span>
+          </div>
+          <br>
+        </div>
+          <!-- fix the below if enough time -->
         <!-- <div>
           <hr class="day-schedule-division" id="first-division">
         </div>
@@ -33,7 +47,6 @@
 import axios from 'axios'
 import Task from '../TaskManagement/Task.vue';
 import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
-import { createApp } from "vue"
 
 export default {
   name: 'DayScheduleTestTaskAPI',
@@ -215,6 +228,31 @@ export default {
 </script>
 
 <style scoped>
+  .time-division {
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+  }
+  /* .time-marker {}  */
+  .time-division-line {
+    /* display: inline-block; */
+    background: #F5F5F5;
+    /* padding: 1%; */ 
+    justify-self: center;
+    align-self: center;
+    height: .1em;
+    width: 100%;
+    margin-left: .1em;
+  }
+  .timings-container {
+    /* border: .001px solid #F5F5F5; */
+    /* height: 130%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 14px;
+    /* margin-top: 270px; */
+  }
   #first-division {
     margin-top: 30px;
   }
