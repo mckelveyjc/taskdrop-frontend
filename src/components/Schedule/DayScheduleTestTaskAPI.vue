@@ -6,16 +6,12 @@
     @dragenter.prevent 
     @dragover.prevent>
         <h1>{{ dayName }}</h1>
-        <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
         <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
             <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
-        <div v-if="renderThis">
-          <!-- <h1>Wawa Weewoo WAYNE!</h1> -->
-          
+        <div v-if="renderDraggedTask">          
           <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
         </div>
-        <!-- <TestTaskAPITask v-bind="updatedProps" v-if="onThisDay"></TestTaskAPITask> -->
         <!-- fix the below if enough time -->
         <!-- <div>
           <hr class="day-schedule-division" id="first-division">
@@ -39,14 +35,8 @@ import Task from '../TaskManagement/Task.vue';
 import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
 import { createApp } from "vue"
 
-// what do we need to load in two tasks at once? 
-// let's put rendered: true or false into the task local storage data structure
 export default {
   name: 'DayScheduleTestTaskAPI',
-  // below is testing
-//   created() {
-//     this.logTasks()
-//   },
   props: {
       dayName: String,
       taskList: Object
@@ -57,65 +47,25 @@ export default {
     TestTaskAPITask
   },
   created() {
-        this.renderThis = false;
+        this.renderDraggedTask = false;
         this.draggedTaskInfoObject = {};
-        this.draggedTaskInfoObjectList = {};
         this.numDroppedTasks = 0;
     },
   data() {
       return {
-        renderThis: Boolean,
+        renderDraggedTask: Boolean,
         draggedTaskInfoObject: Object,
-        draggedTaskInfoObjectList: Array,
         numDroppedTasks: Number
       };
     },
   methods: {
     onDrop(evt) {
-        this.renderThis = true;
-        this.numDroppedTasks++;
-
-        const taskName = evt.dataTransfer.getData('task-name');  
+        this.renderDraggedTask = true;
+        // in the future- get this straight from the draggedTaskInfoObject object because it's in there 
         const taskID = evt.dataTransfer.getData('task-id');
-        const taskInfoObject = evt.dataTransfer.getData('task-info-object');
-
+        this.draggedTaskInfoObject = evt.dataTransfer.getData('task-info-object').split(",");
         const lowerCaseDayName = this.dayName.toLowerCase();
-        this.draggedTaskInfoObject = taskInfoObject.split(",");
-        console.log("type of taskInfoObject: " + typeof(taskInfoObject));
-        console.log("type of draggedTaskInfoObject: " + typeof(this.draggedTaskInfoObject));
 
-        // console.log("name of dropped task: " + taskName);
-        // console.log("ID from dropped task: " + taskID);
-        // console.log("day name: " + this.dayName);
-        console.log("task info object as a string: " + taskInfoObject);
-        console.log("task info object as an array: " + taskInfoObject.split(","));
-        console.log("type of task info object as an array: " + typeof(taskInfoObject.split(",")));
-
-        // need a global counter to keep track of button presses
-        this.draggedTaskInfoObjectList[this.numDroppedTasks] = evt.dataTransfer.getData('task-info-object').split(",");
-        console.log("dragged task info object list: " + Object.values(this.draggedTaskInfoObjectList));
-
-
-
-
-
-        // var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
-        // const wrapper2 = document.createElement("div");
-        // NewTask.mount(wrapper2);
-        // evt.target.appendChild(wrapper2);
-
-        // need to pass :taskInfoObject=taskInfoObject into the task
-        // var testTaskInfoObject = [ 4, 1, "task #1", "testday", "10:00", "11:30" ]
-        // var TestTaskAPITask = createApp(TestTaskAPITask, {taskInfoObject: taskInfoObject});
-        // var TestTaskAPITask = createApp(TestTaskAPITask, {msg: taskName, id: parseInt(taskID)});
-        // const wrapper3 = document.createElement("div");
-        // TestTaskAPITask.mount(wrapper3);
-        // evt.target.appendChild(wrapper3);
-        
-        // CHANGE DB AND RE RENDER WHEN A TASK IS MOVED? OR WOULD THAT BE TOO SLOW
-        // MAYBE JUST CHANGE ITS LOCATION FOR WHEN THE PAGE AUTOMATICALLY RE RENDERS
-        // test if we can send a fetch request from inside onDrop (I don't see why we wouldn't be able to)
-        // let's use get-tasks for fun
         const path = 'http://157.230.93.52/update-task/update-day'
         axios.post(path, {
           "taskID": taskID,
