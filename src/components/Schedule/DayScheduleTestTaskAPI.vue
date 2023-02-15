@@ -12,7 +12,8 @@
         </div>
         <div v-if="renderThis">
           <!-- <h1>Wawa Weewoo WAYNE!</h1> -->
-            <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+          
+          <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
         </div>
         <!-- <TestTaskAPITask v-bind="updatedProps" v-if="onThisDay"></TestTaskAPITask> -->
         <!-- fix the below if enough time -->
@@ -58,41 +59,26 @@ export default {
   created() {
         this.renderThis = false;
         this.draggedTaskInfoObject = {};
+        this.draggedTaskInfoObjectList = {};
+        this.numDroppedTasks = 0;
     },
   data() {
       return {
         renderThis: Boolean,
-        draggedTaskInfoObject: Object
+        draggedTaskInfoObject: Object,
+        draggedTaskInfoObjectList: Array,
+        numDroppedTasks: Number
       };
     },
   methods: {
-    // testing
-    // logTasks() {
-    //     console.log("day schedule test task api tasks: " + this.taskList["mondayTasks"])
-    // },
-    // this one works:
-    // onDrop(evt) {
-    //   const taskName = evt.dataTransfer.getData('task-name');     
-    //   let NewTask = createApp(Task, {msg: taskName});
-    //   const wrapper = document.createElement("div");
-    //   NewTask.mount(wrapper);
-    //   evt.target.appendChild(wrapper);
-    //   localStorage.setItem("lsDayName", this.dayName);
-    //   let lsTaskName = localStorage.getItem('lsTaskName');
-    //   let lsDayName = localStorage.getItem('lsDayName');
-
-    //   console.log("Task: " + lsTaskName);
-    //   console.log("Day: " + lsDayName);
-    // },
     onDrop(evt) {
         this.renderThis = true;
-        // get task name and id number
-        // const data = evt.dataTransfer.getData("text");
-        // console.log("data: " + data);
+        this.numDroppedTasks++;
 
         const taskName = evt.dataTransfer.getData('task-name');  
         const taskID = evt.dataTransfer.getData('task-id');
         const taskInfoObject = evt.dataTransfer.getData('task-info-object');
+
         const lowerCaseDayName = this.dayName.toLowerCase();
         this.draggedTaskInfoObject = taskInfoObject.split(",");
         console.log("type of taskInfoObject: " + typeof(taskInfoObject));
@@ -104,6 +90,14 @@ export default {
         console.log("task info object as a string: " + taskInfoObject);
         console.log("task info object as an array: " + taskInfoObject.split(","));
         console.log("type of task info object as an array: " + typeof(taskInfoObject.split(",")));
+
+        // need a global counter to keep track of button presses
+        this.draggedTaskInfoObjectList[this.numDroppedTasks] = evt.dataTransfer.getData('task-info-object').split(",");
+        console.log("dragged task info object list: " + Object.values(this.draggedTaskInfoObjectList));
+
+
+
+
 
         // var NewTask = createApp(Task, {msg: taskName, id: parseInt(taskID)});
         // const wrapper2 = document.createElement("div");
