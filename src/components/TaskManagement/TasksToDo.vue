@@ -12,9 +12,15 @@
       <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
     </div>
     <!-- to make the below work for multiple tasks, we'll need to make a list of task objects -->
-    <div v-if="displayCreatedTaskBoolean">
+    <!-- the below works (for now lmao) -->
+    <!-- <div v-if="displayCreatedTaskBoolean">
           <TestTaskAPITask :taskInfoObject=this.createdTaskInfoArray></TestTaskAPITask>
+    </div> -->
+
+    <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
+      <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
     </div>
+
     <AddTask @newTaskInfo="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask>
     <!-- added the below to test router -->
     <!-- <router-link
@@ -49,12 +55,14 @@ export default {
   },
   created() {
         this.displayCreatedTaskBoolean = false,
-        this.createdTaskInfoArray = []
+        this.createdTaskInfoArray = [], // needs to be renamed (this is just for one task)
+        this.createdTaskInfoBigList = [] // needs to be renamed (this holds a list of the above)
     },
   data() {
       return {
         displayCreatedTaskBoolean: Boolean,
-        createdTaskInfoArray: Array
+        createdTaskInfoArray: Array,
+        createdTaskInfoBigList: Array
       };
     },
   methods: {
@@ -70,6 +78,7 @@ export default {
       let createdTaskUserID = Object.values(newTaskInfoObject)[0];
       // below probably shouldn't be hardcoded in but whatevs
       this.createdTaskInfoArray = [createdTaskID, createdTaskUserID, "(new task)", "to-do-list", "new-task", "new-task"];
+      this.createdTaskInfoBigList.push(this.createdTaskInfoArray)
     },
     onDrop(evt) {
       // get task name and id number

@@ -3,9 +3,10 @@
       class="task-container"
       draggable="true"
       @dragstart="startDrag($event)">
+      <!-- @input => this.taskInfoArray[0] = taskID => couldn't just enter it in from data() because of the debounce -->
       <h1
         contenteditable
-        @input="updateContent($event)">
+        @input="updateContent($event, this.taskInfoArray[0])">
           {{ this.taskInfoArray[2] }} 
       </h1>
     </div>
@@ -13,6 +14,7 @@
   
   <script>
   import debounce from 'lodash.debounce'
+  import axios from 'axios'
   
   export default {
     name: 'TestTaskAPITask',
@@ -55,23 +57,24 @@
         },
         // I'll use debounce here to make sure we don't send too many requests to the server!
         // I'm super proud of this part of the code because it's a higher-level concept
-        updateContent: debounce((evt) => {
+        updateContent: debounce((evt, taskID) => {
           // now set an internal variable to this:
           console.log(evt.target.innerHTML);
 
           // then throw that + this.id into the following post request:
           // we'll put this code here once I write the code to update the tasks name in the DB
-          // const path = 'http://157.230.93.52/update-task/update-name'
-          // axios.post(path, {
-          //   "taskID": taskID,
-          //   "newDay": lowerCaseDayName
-          // })
-          // .then(response => {
-          //   console.log(response);
-          // })
-          // .catch(err =>{
-          //   console.log(err);
-          // });
+          const path = 'http://157.230.93.52/update-task/update-name'
+          axios.post(path, {
+            "taskID": taskID,
+            // "taskID": "134",
+            "newName": evt.target.innerHTML
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(err =>{
+            console.log(err);
+          });
         }, 500)
     },
   }
