@@ -11,17 +11,11 @@
     <div v-for="taskInfoObject in taskList['toDoListTasks']">
       <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
     </div>
-    <!-- <AddTask @clicked="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask> -->
-    <AddTask @click="displayCreatedTaskFunction()" msg="Add Task" completed=False id="add-task-btn"></AddTask>
-    <!-- rn this only displays all of the tasks when you click on the btn 
-    need a way to get it to only display tasks that aren't already in the component
-    to do that, we could:
-      1. try to force a re-render somehow
-      2. get create-task to send back the task's data- throw that in $emit and render it here 
-    -->
-    <div v-if="displayCreatedTask" v-for="taskInfoObject in taskList['toDoListTasks']">
-          <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+    <!-- to make the below work for multiple tasks, we'll need to make a list of task objects -->
+    <div v-if="displayCreatedTaskBoolean">
+          <TestTaskAPITask :taskInfoObject=this.createdTaskInfoArray></TestTaskAPITask>
     </div>
+    <AddTask @newTaskInfo="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask>
     <!-- added the below to test router -->
     <!-- <router-link
       to="/fetch-test"
@@ -54,11 +48,13 @@ export default {
     TestTaskAPITask
   },
   created() {
-        this.displayCreatedTask = false
+        this.displayCreatedTaskBoolean = false,
+        this.createdTaskInfoArray = []
     },
   data() {
       return {
         displayCreatedTaskBoolean: Boolean,
+        createdTaskInfoArray: Array
       };
     },
   methods: {
@@ -67,8 +63,13 @@ export default {
     //   // console.log(value)
     //   this.displayCreatedTaskBoolean = true
     // },
-    displayCreatedTaskFunction() {
-      this.displayCreatedTaskBoolean = true
+    displayCreatedTaskFunction(newTaskInfoObject) {
+      this.displayCreatedTaskBoolean = true;
+      console.log("new task info: " + Object.values(newTaskInfoObject));
+      let createdTaskID = Object.values(newTaskInfoObject)[1];
+      let createdTaskUserID = Object.values(newTaskInfoObject)[0];
+      // below probably shouldn't be hardcoded in but whatevs
+      this.createdTaskInfoArray = [createdTaskID, createdTaskUserID, "(new task)", "to-do-list", "new-task", "new-task"];
     },
     onDrop(evt) {
       // get task name and id number

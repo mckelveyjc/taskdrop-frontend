@@ -24,14 +24,16 @@ export default {
   },
   methods: {
     // yee yee ! 
-    createTask() {
+    async createTask() {
       // this.$emit('clicked', 'someValue')
       const path = 'http://157.230.93.52/update-task/create-task'
-      axios.post(path, {
+      await axios.post(path, {
         "taskUser": "1" // when we have multiple user's we'll need a way to change this value
       })
       .then(response => {
-        console.log(response);
+        this.$emit('newTaskInfo', {"taskUser": "1", "taskID": response.data})
+        // console.log(response);
+        // console.log("response data: " + response.data);
       })
       .catch(err =>{
         console.log(err);
