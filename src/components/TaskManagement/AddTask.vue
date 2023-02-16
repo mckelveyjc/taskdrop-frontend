@@ -7,8 +7,10 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { createApp } from "vue"
 import Task from './Task.vue';
+import TestTaskAPITask from './TestTaskAPITask.vue';
 
 export default {
   name: 'Task',
@@ -17,22 +19,36 @@ export default {
     completed: Boolean,
   },
   components: {
-    Task
+    Task,
+    TestTaskAPITask
   },
   methods: {
-    // for now, each task is given a random id
     // yee yee ! 
     createTask() {
-      console.log("NEW TASK! (yee yeeeeee)");
-      let NewTask = createApp(Task, {msg: "(new task)", id: Math.floor(Math.random() * 1000)});
-      const wrapper = document.createElement("div");
-      NewTask.mount(wrapper);
-      // document.body.appendChild(wrapper);
+      // this.$emit('clicked', 'someValue')
+      const path = 'http://157.230.93.52/update-task/create-task'
+      axios.post(path, {
+        "taskUser": "1" // when we have multiple user's we'll need a way to change this value
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err =>{
+        console.log(err);
+      });
 
-      let tasksToDoHeader = document.getElementById("tasks-todo-header");
-      tasksToDoHeader.insertBefore(wrapper, tasksToDoHeader.firstElementChild);
-      // have a list of tasks in localstorage that looks like this
-      // [[msg, day], [msg, day], [msg, day]]
+      // for now, each task is given a random id
+
+      // console.log("NEW TASK! (yee yeeeeee)");
+      // let NewTask = createApp(Task, {msg: "(new task)", id: Math.floor(Math.random() * 1000)});
+      // const wrapper = document.createElement("div");
+      // NewTask.mount(wrapper);
+      // // document.body.appendChild(wrapper);
+
+      // let tasksToDoHeader = document.getElementById("tasks-todo-header");
+      // tasksToDoHeader.insertBefore(wrapper, tasksToDoHeader.firstElementChild);
+      // // have a list of tasks in localstorage that looks like this
+      // // [[msg, day], [msg, day], [msg, day]]
     },
   }
 }

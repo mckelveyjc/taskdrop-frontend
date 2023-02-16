@@ -1,7 +1,7 @@
 <template>
   <div class="task-management-container">
-    <TasksToDo headerMsg="tasks to do"/>
-    <CompletedTasks msg="completed tasks"/>
+    <TasksToDo headerMsg="tasks to do" :taskList="taskList"/>
+    <CompletedTasks msg="completed tasks" :taskList="taskList"/>
     <Notes msg="notes"/>
   </div>
 </template>
@@ -13,6 +13,9 @@ import Notes from './Notes.vue';
 
 export default {
   name: 'TaskManagementContainer',
+  props: {
+    taskList: Object
+  },
   components: {
     TasksToDo,
     CompletedTasks,

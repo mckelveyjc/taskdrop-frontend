@@ -1,7 +1,9 @@
 <template>
   <div class="todo-list-container">
     <h1>{{ msg }}</h1>
-    <TaskManagementContainer />
+    <!-- don't need to push the entire dictionary of data to the below two containers
+    will fix this eventually -->
+    <TaskManagementContainer :taskList="taskList"/> 
     <ScheduleContainer :taskList="taskList"/>
     <!-- use the below in a min! -->
     <!-- <div v-for="task in taskList">
@@ -34,8 +36,8 @@ export default {
         thursdayTasks: [],
         fridayTasks: [],
         saturdayTasks: [],
-        sundayTasks: []
-
+        sundayTasks: [],
+        toDoListTasks: []
       },
       erroMsg: "",
     }
@@ -74,6 +76,9 @@ export default {
                 break;
               case "sunday":
                 this.taskList['sundayTasks'].push(response.data[index])
+                break;
+              case "to-do-list":
+                this.taskList['toDoListTasks'].push(response.data[index])
                 break;
             }
           }

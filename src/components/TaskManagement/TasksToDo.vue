@@ -7,10 +7,23 @@
     <h1 id="tasks-todo-header">{{ headerMsg }}</h1>
     <!-- <Task msg="Task #1" completed=False id="1"></Task> -->
     <!-- <Task msg="Task #2" completed=False id="2"></Task> -->
-    <Task v-bind="updatedProps" v-if="onThisDay"></Task>
-    <AddTask msg="Add Task" completed=False id="add-task-btn"></AddTask>
+    <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
+    <div v-for="taskInfoObject in taskList['toDoListTasks']">
+      <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+    </div>
+    <!-- <AddTask @clicked="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask> -->
+    <AddTask @click="displayCreatedTaskFunction()" msg="Add Task" completed=False id="add-task-btn"></AddTask>
+    <!-- rn this only displays all of the tasks when you click on the btn 
+    need a way to get it to only display tasks that aren't already in the component
+    to do that, we could:
+      1. try to force a re-render somehow
+      2. get create-task to send back the task's data- throw that in $emit and render it here 
+    -->
+    <div v-if="displayCreatedTask" v-for="taskInfoObject in taskList['toDoListTasks']">
+          <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+    </div>
     <!-- added the below to test router -->
-    <router-link
+    <!-- <router-link
       to="/fetch-test"
       custom
       v-slot="{ navigate }">
@@ -19,25 +32,44 @@
         role="link">
         Fetch Test
       </button>
-    </router-link>
+    </router-link> -->
   </div>
 </template>
 
 <script>
 import Task from './Task.vue';
 import AddTask from './AddTask.vue';
+import TestTaskAPITask from './TestTaskAPITask.vue';
 import { createApp } from "vue"
 
 export default {
   name: 'TasksToDo',
   props: {
-    headerMsg: String
+    headerMsg: String,
+    taskList: Object
   },
   components: {
     AddTask,
-    Task
+    Task,
+    TestTaskAPITask
   },
+  created() {
+        this.displayCreatedTask = false
+    },
+  data() {
+      return {
+        displayCreatedTaskBoolean: Boolean,
+      };
+    },
   methods: {
+    // displayCreatedTaskFunction(value) {
+    //   console.log("cat")
+    //   // console.log(value)
+    //   this.displayCreatedTaskBoolean = true
+    // },
+    displayCreatedTaskFunction() {
+      this.displayCreatedTaskBoolean = true
+    },
     onDrop(evt) {
       // get task name and id number
       const taskName = evt.dataTransfer.getData('task-name');  
