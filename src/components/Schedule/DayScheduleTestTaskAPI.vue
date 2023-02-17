@@ -12,7 +12,8 @@
         <div v-if="renderDraggedTask">          
           <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
         </div>
-        <div class="timings-container">
+        <!-- takin these out because I threw time divisions into the backlog -->
+        <!-- <div class="timings-container">
           <div class="time-division">
             <p class="time-marker">10AM</p><span class="time-division-line"></span>
           </div>
@@ -25,7 +26,7 @@
             <p class="time-marker">12PM</p><span class="time-division-line"></span>
           </div>
           <br>
-        </div>
+        </div> -->
           <!-- fix the below if enough time -->
         <!-- <div>
           <hr class="day-schedule-division" id="first-division">

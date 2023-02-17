@@ -1,11 +1,10 @@
 <template>
   <div 
     class="completed-tasks-container"    
-    @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-    <h1>{{ msg }}</h1>
-    <Task v-bind="updatedProps" v-if="onThisDay"></Task>
+    <h1 id="completed-tasks-header">{{ msg }}</h1>
+    <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
   </div>
 </template>
 
@@ -185,10 +184,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #completed-tasks-header {
+    font-size: xx-large;
+  }
   .completed-tasks-container {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
-    height: 25%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* margin-top: 4px; */
   }
 </style>

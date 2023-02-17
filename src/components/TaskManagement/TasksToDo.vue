@@ -33,6 +33,17 @@
         Fetch Test
       </button>
     </router-link> -->
+    <!-- added below to test openai request -->
+    <!-- <router-link
+      to="/openai-test"
+      custom
+      v-slot="{ navigate }">
+      <button
+        @click="navigate"
+        role="link">
+        OpenAI Test
+      </button>
+    </router-link> -->
   </div>
 </template>
 
@@ -245,10 +256,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #tasks-todo-header {
+    padding-top: 2%;
+    font-size: xx-large;
+  }
   .tasks-todo-container {
+    margin-top: 10px; /* this needs to be globally consistent */
+    /* font-size: large; */
     border: .001px solid #F5F5F5;
     border-radius: 15px;
-    height: 49%;
+    /* height: 82.75%; */
+    height: 60%;
     display: flex;
     flex-direction: column;
     /* align-items: center; */

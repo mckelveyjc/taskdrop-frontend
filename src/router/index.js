@@ -14,6 +14,12 @@ const routes = [
       name: "FetchTest",
         component: () => import(
           /* webpackChunkName: "FetchTest" */ '../components/FetchTest.vue')
+    },
+    {
+      path: "/openai-test",
+      name: "OpenAITest",
+        component: () => import(
+        /* webpackChunkName: "FetchTest" */ '../components/OpenAITest.vue')
     }
 ]
 

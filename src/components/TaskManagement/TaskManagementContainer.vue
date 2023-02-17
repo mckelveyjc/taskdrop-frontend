@@ -1,8 +1,8 @@
 <template>
   <div class="task-management-container">
-    <TasksToDo headerMsg="tasks to do" :taskList="taskList"/>
-    <CompletedTasks msg="completed tasks" :taskList="taskList"/>
-    <Notes msg="notes"/>
+    <TasksToDo headerMsg="Tasks To Do" :taskList="taskList"/>
+    <CompletedTasks msg="Complete Task" :taskList="taskList"/>
+    <Notes msg="View Achievements"/>
   </div>
 </template>
 
