@@ -1,71 +1,70 @@
 <template>
-    <Button 
-    class="task-container" 
-    @click="testOpenAI()">
-    <h1>TEST OPEN AI</h1>
-    </Button>
-  </template>
-  <script>
-    import axios from 'axios';
-    export default {
-      data() {
-        return {
-          dataentry: {
-            "userName": "",
-            "email": "",
-            "password": ""
-          }
-        };
-      },
-      methods:{
-        testOpenAI(){
-            const options = {
-                method: 'POST',
-                // url: 'https://openai37.p.rapidapi.com/generate-image',
-                url: 'https://api.openai.com/v1/images/generations',
-                headers: {
-                    'content-type': 'application/json',
-                    'X-RapidAPI-Key': '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',
-                    'X-RapidAPI-Host': 'openai37.p.rapidapi.com'
-                },
-            data: '{"prompt":"hyper realistic utopian overcrowded city with flying cars","size":"small"}'
-            };
-            axios.request(options).then(function (response) {
-	            console.log(response.data);
-            }).catch(function (error) {
-	            console.error(error);
-            });
-        }
-      }
-    };
-  </script>
-  <style>
-    form {
-      padding: 10px;
-      border: 2px solid black;
-      border-radius: 5px;
+  <div>
+    <button @click="showSingle">Show single picture.</button>
+    <button @click="showMultiple">Show a group of pictures.</button>
+
+    <vue-easy-lightbox
+      :visible="visibleRef"
+      :imgs="imgsRef"
+      :index="indexRef"
+      @hide="onHide"
+    ></vue-easy-lightbox>
+  </div>
+</template>
+
+<script>
+// If VueApp is already registered with VueEasyLightbox, there is no need to register it here.
+import VueEasyLightbox from 'vue-easy-lightbox'
+import { ref, defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    VueEasyLightbox
+  },
+  setup() {
+    const visibleRef = ref(false)
+    const indexRef = ref(0) // default 0
+    const imgsRef = ref([])
+    // Img Url , string or Array of string
+    // ImgObj { src: '', title: '', alt: '' }
+    // 'src' is required
+    // allow mixing
+
+    const onShow = () => {
+      visibleRef.value = true
     }
-  
-    input {
-      padding: 4px 8px;
-      margin: 4px;
+    const showSingle = () => {
+      imgsRef.value = 'http://via.placeholder.com/350x150'
+      // or
+      // imgsRef.value  = {
+      //   title: 'this is a placeholder',
+      //   src: 'http://via.placeholder.com/350x150'
+      // }
+      onShow()
     }
-  
-    span {
-      font-size: 18px;
-      margin: 4px;
-      font-weight: 500;
+    const showMultiple = () => {
+      imgsRef.value = [
+        'http://via.placeholder.com/350x150',
+        'http://via.placeholder.com/350x150'
+      ]
+      // or
+      // imgsRef.value = [
+      //   { title: 'test img', src: 'http://via.placeholder.com/350x150' },
+      //   'http://via.placeholder.com/350x150'
+      // ]
+      indexRef.value = 0 // index of imgList
+      onShow()
     }
-  
-    .submit {
-      font-size: 15px;
-      color: #fff;
-      background: #222;
-      padding: 6px 12px;
-      border: none;
-      margin-top: 8px;
-      cursor: pointer;
-      border-radius: 5px;
+    const onHide = () => (visibleRef.value = false)
+
+    return {
+      visibleRef,
+      indexRef,
+      imgsRef,
+      showSingle,
+      showMultiple,
+      onHide
     }
-  
-  </style>
+  }
+})
+</script>

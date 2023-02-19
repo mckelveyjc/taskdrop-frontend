@@ -3,6 +3,10 @@
     <h1>{{ msg }}</h1>
     <!-- don't need to push the entire dictionary of data to the below two containers
     will fix this eventually -->
+    <!-- <AchievementsCarousel v-if="achievementsClicked"></AchievementsCarousel>
+    <TaskManagementContainer :taskList="taskList"/> 
+    <ScheduleContainer :taskList="taskList"/> -->
+    <!-- <AchievementsCarousel></AchievementsCarousel> -->
     <TaskManagementContainer :taskList="taskList"/> 
     <ScheduleContainer :taskList="taskList"/>
     <!-- use the below in a min! -->
@@ -17,15 +21,20 @@
 import axios from 'axios'
 import TaskManagementContainer from './TaskManagement/TaskManagementContainer.vue';
 import ScheduleContainer from './Schedule/ScheduleContainer.vue';
+import AchievementsCarousel from './TaskManagement/AchievementsCarousel.vue';
 // import LeftToolBar from './ToolBar/LeftToolBar.vue';
 
 export default {
   name: 'ToDoList',
   created() {
-    this.getTasks()
+    this.getTasks();
+    this.achievementsClicked = true
   },
   data() {
     return {
+      opened: false,
+      visible: false,
+      achievementsClicked: Boolean,
       // taskList: [],
       // taskList should look something like this:
       taskList: {
@@ -100,13 +109,20 @@ export default {
   components: {
     TaskManagementContainer,
     ScheduleContainer,
+    AchievementsCarousel,
     // LeftToolBar,
   }
 }
 </script>
 
 <style scoped>
-  .todo-list-container {
+  #overlay {
+    position: absolute;
+    border: 2px solid red;
+    height: 100vh;
+    width: 100vh
+  }
+.todo-list-container {
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;
