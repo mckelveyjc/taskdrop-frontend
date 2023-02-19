@@ -2,6 +2,7 @@
   <div class="task-management-container">
     <TasksToDo headerMsg="Tasks To Do" :taskList="taskList"/>
     <CompletedTasks msg="Complete Task" :taskList="taskList"/>
+    <BionicReader msg="Bionic Reader"/>
     <Notes msg="View Achievements"/>
   </div>
 </template>
@@ -10,6 +11,7 @@
 import TasksToDo from './TasksToDo.vue';
 import CompletedTasks from './CompletedTasks.vue';
 import Notes from './Notes.vue';
+import BionicReader from '../Accessibility/BionicReader.vue';
 
 export default {
   name: 'TaskManagementContainer',
@@ -20,6 +22,7 @@ export default {
     TasksToDo,
     CompletedTasks,
     Notes,
+    BionicReader
   }
 }
 </script>

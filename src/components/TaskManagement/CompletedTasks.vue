@@ -190,7 +190,7 @@ export default {
   .completed-tasks-container {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
-    height: 8%;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
