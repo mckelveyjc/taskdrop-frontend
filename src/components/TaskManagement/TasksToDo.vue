@@ -34,7 +34,7 @@
       </button>
     </router-link> -->
     <!-- added below to test openai request -->
-    <router-link
+    <!-- <router-link
       to="/openai-test"
       custom
       v-slot="{ navigate }">
@@ -43,7 +43,7 @@
         role="link">
         OpenAI Test
       </button>
-    </router-link>
+    </router-link> -->
   </div>
 </template>
 

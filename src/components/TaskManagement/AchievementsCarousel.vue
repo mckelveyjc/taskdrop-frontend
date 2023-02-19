@@ -1,13 +1,17 @@
 <template>
   <div>
     <!-- <button @click="showSingle">Show single picture.</button> -->
-    <button @click="showMultiple">Show a group of pictures.</button>
-
-    <vue-easy-lightbox
+    <!-- <button @click="showMultiple">Show a group of pictures.</button> -->
+    <!-- <vue-easy-lightbox v-if="showAchievementsClicked"
       :visible="visibleRef"
       :imgs="imgsRef"
       :index="indexRef"
       @hide="onHide"
+    ></vue-easy-lightbox> -->
+    <vue-easy-lightbox v-if="showAchievementsClicked"
+      :visible="visibleRef"
+      :imgs="imgsRef"
+      :index="indexRef"
     ></vue-easy-lightbox>
   </div>
 </template>
@@ -58,6 +62,9 @@ export default defineComponent({
       indexRef.value = 0 // index of imgList
       onShow()
     }
+    // console.log(showAchievementsClicked)
+    // if (showAchievementsClicked){showMultiple()}
+    showMultiple()
     const onHide = () => (visibleRef.value = false)
 
     return {

@@ -1,8 +1,8 @@
 <!-- remaking this to be gallery of badges instead (should be a button) -->
 <template>
-  <div class="notes-container" @click="showAchievementsClicked = true">
+  <div class="notes-container" @click="showAchievementsClicked = !showAchievementsClicked">
     <h1 id="achievements-header">{{ msg }}</h1>
-    <AchievementsCarousel showAchievementsClicked="showAchievementsClicked"></AchievementsCarousel>
+    <AchievementsCarousel :showAchievementsClicked=showAchievementsClicked></AchievementsCarousel>
     <!-- <div id="image-div">
       <img :src = "imgUrl" id="achievements-image"/>
     </div> -->
@@ -51,6 +51,9 @@ export default {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
     height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* margin-top: 4px; */
   }
 </style>
