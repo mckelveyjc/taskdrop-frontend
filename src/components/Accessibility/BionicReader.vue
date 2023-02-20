@@ -22,7 +22,7 @@
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
     #completed-tasks-header {
-      font-size: xx-large;
+      font-size: x-large;
     }
     .completed-tasks-container {
       border: .001px solid #F5F5F5;
