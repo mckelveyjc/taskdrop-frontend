@@ -258,7 +258,7 @@ export default {
 <style scoped>
   #tasks-todo-header {
     padding-top: 2%;
-    font-size: xx-large;
+    font-size: x-large;
   }
   .tasks-todo-container {
     margin-top: 10px; /* this needs to be globally consistent */

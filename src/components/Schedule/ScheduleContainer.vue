@@ -20,7 +20,7 @@
     <!-- <div v-for="task in taskList">
       {{ task }}
     </div> -->
-    <DayScheduleTestTaskAPI dayName="Testday" :taskList="taskList"/>
+    <!-- <DayScheduleTestTaskAPI dayName="Testday" :taskList="taskList"/> -->
     <DayScheduleTestTaskAPI dayName="Monday" :taskList="taskList"/>
     <DayScheduleTestTaskAPI dayName="Tuesday" :taskList="taskList"/>
     <DayScheduleTestTaskAPI dayName="Wednesday" :taskList="taskList"/>

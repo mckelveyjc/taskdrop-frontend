@@ -32,7 +32,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   #achievements-header {
-    font-size: xx-large;
+    font-size: x-large;
     margin-top: 2%;
   }
   #achievements-image {
