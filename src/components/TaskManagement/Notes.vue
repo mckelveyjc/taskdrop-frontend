@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import AchievementsCarousel from './AchievementsCarousel.vue';
 
 export default {
