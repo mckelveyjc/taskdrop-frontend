@@ -12,6 +12,7 @@
       :visible="visibleRef"
       :imgs="imgsRef"
       :index="indexRef"
+      @hide="onHide"
     ></vue-easy-lightbox>
   </div>
 </template>
@@ -33,6 +34,11 @@ export default defineComponent({
   components: {
     VueEasyLightbox
   },
+  // data(){
+  //   return {
+  //     showAchievementsClicked: this.showAchievementsClicked
+  //   }
+  // },
   setup() {
     // imgUrlArray = Object.values(imgUrlArray);
     const visibleRef = ref(false)
@@ -40,33 +46,33 @@ export default defineComponent({
     const imgsRef = ref([])
     var imgUrlArray = []
 
-    const loadAchievements = async () =>{
-        const path = 'http://157.230.93.52/get-images'
-        await axios.post(path, {
-          "taskUserID": "1" // make this usable for more than one user eventually
-        })
-        .then(response => {
-          // console.log(response["data"]["data"]) // don't know why there are two "datas" lmao
-          // for (let i = 0; i < response["data"]["data"].length; i++){
-            // imgUrlArray.push(response["data"]["data"][i])
-          // }
-          // console.log("imgUrlArray: " + imgUrlArray[0])
-          imgUrlArray.push("https://nationaltoday.com/wp-content/uploads/2021/12/Annoy-Squidward-Day-640x514.jpg");
-          imgUrlArray.push("https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg");
-          return imgUrlArray
-        })
-        .catch(err =>{
-          console.log(err);
-        });
-        // const path = 'http://157.230.93.52/get-tasks'
-        // axios.post(path, {})
-        // .then(response => {
-        //   console.log(response);
-        // })
-        // .catch(err =>{
-        //   console.log(err);
-        // });
-      };
+    // const loadAchievements = async () =>{
+    //     const path = 'http://157.230.93.52/get-images'
+    //     await axios.post(path, {
+    //       "taskUserID": "1" // make this usable for more than one user eventually
+    //     })
+    //     .then(response => {
+    //       // console.log(response["data"]["data"]) // don't know why there are two "datas" lmao
+    //       // for (let i = 0; i < response["data"]["data"].length; i++){
+    //         // imgUrlArray.push(response["data"]["data"][i])
+    //       // }
+    //       // console.log("imgUrlArray: " + imgUrlArray[0])
+    //       imgUrlArray.push("https://nationaltoday.com/wp-content/uploads/2021/12/Annoy-Squidward-Day-640x514.jpg");
+    //       imgUrlArray.push("https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg");
+    //       return imgUrlArray
+    //     })
+    //     .catch(err =>{
+    //       console.log(err);
+    //     });
+    //     // const path = 'http://157.230.93.52/get-tasks'
+    //     // axios.post(path, {})
+    //     // .then(response => {
+    //     //   console.log(response);
+    //     // })
+    //     // .catch(err =>{
+    //     //   console.log(err);
+    //     // });
+    //   };
       // loadAchievements();
     // Img Url , string or Array of string
     // ImgObj { src: '', title: '', alt: '' }
@@ -76,6 +82,7 @@ export default defineComponent({
     const onShow = () => {
       visibleRef.value = true
     }
+
     const showSingle = () => {
       imgsRef.value = 'http://via.placeholder.com/350x150'
       // or
@@ -88,7 +95,7 @@ export default defineComponent({
     const showMultiple = async () => {
       // definitely a better way to do this rather than putting a whole fetch request in here
       const path = 'http://157.230.93.52/get-images'
-        await axios.post(path, {
+        await axios.post( path, {
           "taskUserID": "1" // make this usable for more than one user eventually
         })
         .then(response => {
@@ -100,7 +107,7 @@ export default defineComponent({
           // console.log("imgUrlArray: " + imgUrlArray[0])
           // imgUrlArray.push("https://nationaltoday.com/wp-content/uploads/2021/12/Annoy-Squidward-Day-640x514.jpg");
           // imgUrlArray.push("https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg");
-          console.log(imgUrlArray);
+          // console.log(imgUrlArray);
         })
         .catch(err =>{
           console.log(err);
@@ -120,7 +127,10 @@ export default defineComponent({
     // console.log(showAchievementsClicked)
     // if (showAchievementsClicked){showMultiple()}
     showMultiple()
-    const onHide = () => (visibleRef.value = false)
+    const onHide = () => {
+      visibleRef.value = false;
+      // console.log(showAchievementsClicked)
+    }
 
     return {
       visibleRef,
