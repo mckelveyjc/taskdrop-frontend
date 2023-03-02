@@ -3,9 +3,9 @@
   <!-- <div class="notes-container" @click="showAchievementsClicked = !showAchievementsClicked"> -->
   <div class="notes-container" @click="showAchievementsClicked = true">
     <!-- <h1 id="achievements-header">{{ msg }}</h1> -->
-    <p v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
-    <p v-else>{{msg}}</p>
-    
+    <p v-if="this.bionicReaderStatus" class="task-management-btn-header" v-html="bionicReading(msg)"></p>
+    <p v-else class="task-management-btn-header">{{msg}}</p>
+
     <!-- <AchievementsCarousel :showAchievementsClicked=showAchievementsClicked :imgUrlArray=imgUrlArray></AchievementsCarousel> -->
     <AchievementsCarousel :showAchievementsClicked=showAchievementsClicked></AchievementsCarousel>
     <!-- <div id="image-div">
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import AchievementsCarousel from './AchievementsCarousel.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
@@ -75,6 +74,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .task-management-btn-header {
+    font-size: 30px;
+  }
+
   #achievements-header {
     font-size: x-large;
     margin-top: 2%;

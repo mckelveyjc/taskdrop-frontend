@@ -100,7 +100,11 @@ export default defineComponent({
         })
         .then(response => {
           // console.log(response["data"]["data"]) // don't know why there are two "datas" lmao
-          for (let i = 0; i < response["data"]["data"].length; i++){
+          // for (let i = 0; i < response["data"]["data"].length; i++){
+          //   imgUrlArray.push(response["data"]["data"][i])
+          // }
+          // add images in reverse order
+          for (let i = response["data"]["data"].length - 1; i >= 0; i--){
             imgUrlArray.push(response["data"]["data"][i])
           }
           // *** testing *** 

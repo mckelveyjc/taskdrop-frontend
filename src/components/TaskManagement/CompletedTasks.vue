@@ -5,8 +5,8 @@
     @dragenter.prevent 
     @dragover.prevent>
     <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
-    <p v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
-    <p v-else>{{msg}}</p>
+    <p class="task-management-btn-header" v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
+    <p class="task-management-btn-header" v-else>{{msg}}</p>
   
   </div>
 </template>
@@ -76,6 +76,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .task-management-btn-header {
+    font-size: 30px;
+  }
+
   #completed-tasks-header {
     font-size: x-large;
   }

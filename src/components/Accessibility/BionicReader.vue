@@ -4,7 +4,7 @@
       @click="toggleBionicReaderFunction"
       class="completed-tasks-container">
       <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
-      <p v-html="bionicReading(msg)"></p>
+      <p class="task-management-btn-header" v-html="bionicReading(msg)"></p>
     </div>
   </template>
   
@@ -46,6 +46,10 @@
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
+    .task-management-btn-header {
+      font-size: 30px;
+    }
+
     #completed-tasks-header {
       font-size: x-large;
     }
