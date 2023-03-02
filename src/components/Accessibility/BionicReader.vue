@@ -1,20 +1,45 @@
+<!-- @click="toggleBionicReader()" -->
 <template>
     <div 
-      class="completed-tasks-container"    
-      @dragenter.prevent 
-      @dragover.prevent>
-      <h1 id="completed-tasks-header">{{ msg }}</h1>
+      @click="toggleBionicReaderFunction"
+      class="completed-tasks-container">
+      <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
+      <p v-html="bionicReading(msg)"></p>
     </div>
   </template>
   
   <script>  
+  import store from '../../store'
+  import { computed } from '@vue/runtime-core'
+  import { bionicReading } from 'bionic-reading';
+
   export default {
     name: 'BionicReader',
     props: {
       msg: String
     },
+    setup(){
+      const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
+      const toggleBionicReaderFunction = () => {
+        store.mutations.toggleBionicReader()
+        // console.log("bionic reader active:", store.getters.getBionicReaderStatus())
+      }
+      return {
+        bionicReaderStatus,
+        toggleBionicReaderFunction,
+        bionicReading
+      }
+    },
     components: {},
-    methods: {},
+    methods: {
+      toggleBionicReader() {
+        const timer = ref(false);
+        // var bionicReaderActiveLocal = this.$bionicReaderActive;
+        // this.bionicReaderActive = !bionicReaderActive;
+        config.globalProperties.$bionicReaderActive = false;
+        console.log(this.$bionicReaderActive);
+      }
+    },
     computed: {}   
   }
   </script>

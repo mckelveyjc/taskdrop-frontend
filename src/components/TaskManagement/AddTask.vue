@@ -2,15 +2,20 @@
   <div 
     class="task-container" 
     @click="createTask($event)">
-    <h1>{{ msg }}</h1>
+    <!-- <h1 >{{ msg }}</h1> -->
+    <!-- <p class="task-text" v-html="bionicReading(msg)"></p> -->    
+    <p v-if="this.bionicReaderStatus" class="task-text" v-html="bionicReading(msg)"></p>
+    <p v-else class="task-text" v-html="msg"></p>
   </div>
 </template>
 
 <script>
+import { bionicReading } from 'bionic-reading';
 import axios from 'axios'
-import { createApp } from "vue"
 import Task from './Task.vue';
 import TestTaskAPITask from './TestTaskAPITask.vue';
+import store from '../../store'
+import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'Task',
@@ -21,6 +26,13 @@ export default {
   components: {
     Task,
     TestTaskAPITask
+  },
+  setup() {
+    const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
+    return {
+      bionicReaderStatus,
+      bionicReading
+    }
   },
   methods: {
     // yee yee ! 
@@ -57,6 +69,10 @@ export default {
 </script>
 
 <style scoped>
+  /* make the below a global style eventually */
+  .task-text {
+    font-size: 20px;
+  }
   .task-container {
     color: black;
     border-radius: 5px;

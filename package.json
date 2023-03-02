@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "bionic-reading": "^1.4.0",
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
     "lodash.debounce": "^4.0.8",

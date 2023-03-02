@@ -4,13 +4,19 @@
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-    <h1 id="completed-tasks-header">{{ msg }}</h1>
+    <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
+    <p v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
+    <p v-else>{{msg}}</p>
+  
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import DayScheduleTestTaskAPI from '../Schedule/DayScheduleTestTaskAPI.vue';
+import store from '../../store'
+import { computed } from '@vue/runtime-core'
+import { bionicReading } from 'bionic-reading';
 
 export default {
   name: 'CompletedTasks',
@@ -27,6 +33,13 @@ export default {
     return {
       draggedTaskInfoObject: Object,
     };
+  },
+  setup() {
+    const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
+    return {
+      bionicReaderStatus,
+      bionicReading
+    }
   },
   methods: {
     onDrop(evt) {

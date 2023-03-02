@@ -5,7 +5,10 @@
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-        <h1>{{ dayName }}</h1>
+        <!-- <h1>{{ dayName }}</h1> -->
+        <p class="day-header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(dayName)"></p>
+        <p class="day-header-text" v-else>{{dayName}}</p>
+
         <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
             <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
@@ -48,6 +51,9 @@
 import axios from 'axios'
 import Task from '../TaskManagement/Task.vue';
 import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
+import store from '../../store'
+import { computed } from '@vue/runtime-core'
+import { bionicReading } from 'bionic-reading';
 
 export default {
   name: 'DayScheduleTestTaskAPI',
@@ -72,6 +78,13 @@ export default {
         numDroppedTasks: Number
       };
     },
+  setup() {
+    const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
+    return {
+      bionicReaderStatus,
+      bionicReading
+    }
+  },
   methods: {
     onDrop(evt) {
         this.renderDraggedTask = true;
@@ -229,6 +242,10 @@ export default {
 </script>
 
 <style scoped>
+  /* @import "../../assets/global.css"; */
+  .day-header-text {
+    font-size: 25px;
+  }
   .time-division {
     margin-right: auto;
     width: 100%;

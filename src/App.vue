@@ -5,6 +5,11 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
+import store from './store'
+
+const state = computed(() => store.state)
+
 export default {
   name: 'App',
 }

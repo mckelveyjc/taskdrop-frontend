@@ -4,7 +4,10 @@
     @dragenter.prevent 
     @dragover.prevent
     id="tasks-todo-container-id">
-    <h1 id="tasks-todo-header">{{ headerMsg }}</h1>
+    <!-- <h1 id="tasks-todo-header">{{ headerMsg }}</h1> -->
+    <p class="header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(headerMsg)"></p>
+    <p class="header-text" v-else>{{headerMsg}}</p>
+
     <!-- <Task msg="Task #1" completed=False id="1"></Task> -->
     <!-- <Task msg="Task #2" completed=False id="2"></Task> -->
     <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
@@ -52,6 +55,9 @@ import Task from './Task.vue';
 import AddTask from './AddTask.vue';
 import TestTaskAPITask from './TestTaskAPITask.vue';
 import { createApp } from "vue"
+import store from '../../store'
+import { computed } from '@vue/runtime-core'
+import { bionicReading } from 'bionic-reading';
 
 export default {
   name: 'TasksToDo',
@@ -76,6 +82,13 @@ export default {
         createdTaskInfoBigList: Array
       };
     },
+  setup() {
+    const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
+    return {
+      bionicReaderStatus,
+      bionicReading
+    }
+  },
   methods: {
     // displayCreatedTaskFunction(value) {
     //   console.log("cat")
@@ -256,6 +269,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .header-text {
+    font-size: 25px;
+  }
+
   #tasks-todo-header {
     padding-top: 2%;
     font-size: x-large;
