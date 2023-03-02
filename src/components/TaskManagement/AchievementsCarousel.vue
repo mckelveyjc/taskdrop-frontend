@@ -23,8 +23,12 @@ import { ref, defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
-    showAchievementsClicked: Boolean
+    showAchievementsClicked: Boolean,
+    imgUrlArray: Array
   },
+  // created(){
+  //   console.log("imgUrlArray: " + this.imgUrlArray);
+  // },
   components: {
     VueEasyLightbox
   },
@@ -51,8 +55,9 @@ export default defineComponent({
     }
     const showMultiple = () => {
       imgsRef.value = [
+        // 'http://via.placeholder.com/350x150',
         'http://via.placeholder.com/350x150',
-        'http://via.placeholder.com/350x150'
+        'https://modernfarmer.com/wp-content/uploads/2014/12/shrekfeature.jpg'
       ]
       // or
       // imgsRef.value = [
