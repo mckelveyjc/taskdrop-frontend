@@ -7,7 +7,7 @@
     <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
     <p class="task-management-btn-header" v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
     <p class="task-management-btn-header" v-else>{{msg}}</p>
-  
+    <p class="task-completion-counter">{{this.taskCompletionCounter}}/5</p>
   </div>
 </template>
 
@@ -26,12 +26,16 @@ export default {
   components: {
     DayScheduleTestTaskAPI
   },
-  created() {
+  async created() {
     this.draggedTaskInfoObject = {};
+    // this.taskCompletionCounter = 0; // should get the # from the database here instead
+    this.taskCompletionCounter = 1; // should get the # from the database here instead
+    this.getNumCompletedTasks()
   },
   data() {
     return {
       draggedTaskInfoObject: Object,
+      taskCompletionCounter: Number
     };
   },
   setup() {
@@ -42,6 +46,17 @@ export default {
     }
   },
   methods: {
+    async getNumCompletedTasks() {
+      const path = 'http://157.230.93.52/get-tasks/get-num-completed'
+        await axios.post(path, {})
+        .then(response => {
+            let numCompletedTasks = response["data"]["numCompletedTasks"];
+            this.taskCompletionCounter = numCompletedTasks
+        })
+        .catch(err =>{
+            console.log(err);
+        });
+    },
     onDrop(evt) {
         // I have no idea why the below line isn't working even though it works in DayScheduleTestTaskAPI
         // this.draggedTaskInfoObject = evt.dataTransfer.getData('task-info-object').split(",");
@@ -63,7 +78,13 @@ export default {
           "taskEnd": taskEnd
         })
         .then(response => {
-            console.log(response);
+            let artReady = response["data"]["artReady"];
+            this.taskCompletionCounter++;
+            if (artReady){
+              location.reload();
+              alert("A New Achievement is Ready!");
+              this.taskCompletionCounter = 0;
+            } 
         })
         .catch(err =>{
             console.log(err);
@@ -76,7 +97,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .task-management-btn-header {
+  .task-completion-counter {
+    font-size: 30px;
+    margin-left: 5%;
+  }
+.task-management-btn-header {
     font-size: 30px;
   }
 
