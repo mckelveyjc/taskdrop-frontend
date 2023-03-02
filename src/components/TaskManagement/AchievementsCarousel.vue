@@ -112,10 +112,14 @@ export default defineComponent({
         .catch(err =>{
           console.log(err);
         });
-      imgsRef.value = [
-        imgUrlArray[0],
-        imgUrlArray[1]
-      ]
+      // imgsRef.value = [
+      //   imgUrlArray[0],
+      //   imgUrlArray[1]
+      // ]
+      for (let index = 0; index < imgUrlArray.length; index++){
+        imgsRef.value.push(imgUrlArray[index])
+      }
+
       // or
       // imgsRef.value = [
       //   { title: 'test img', src: 'http://via.placeholder.com/350x150' },
