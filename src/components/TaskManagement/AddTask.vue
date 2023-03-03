@@ -82,8 +82,10 @@ export default {
     /* height: 50px; */
     /* width: 70%; */
     /* width: 250px; */
-    height: 10.5em;
-    width: 30em;
+    /* height: 10.5em; */
+    /* width: 30em; */
+    height: 6em;
+    width: 23em;
     /* margin-left: 35px; */
     display: flex;
     align-items: center;

@@ -75,7 +75,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .task-management-btn-header {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   #achievements-header {
