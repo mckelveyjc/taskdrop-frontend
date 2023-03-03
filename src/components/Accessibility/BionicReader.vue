@@ -47,7 +47,7 @@
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style scoped>
     .task-management-btn-header {
-      font-size: 30px;
+      font-size: 32px;
     }
 
     #completed-tasks-header {
@@ -57,6 +57,7 @@
       border: .001px solid #F5F5F5;
       border-radius: 15px;
       height: 10%;
+      /* height: 8.5%; */
       display: flex;
       align-items: center;
       justify-content: center;

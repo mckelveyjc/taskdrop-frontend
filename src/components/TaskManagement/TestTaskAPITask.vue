@@ -103,19 +103,17 @@
   
   <style scoped>
     .task-text {
-      font-size: 20px;
+      /* font-size: 20px; */
+      font-size: 25px;
     }
     .task-container {
       font-size: 10px;
       color: black;
       border-radius: 5px;
       background-color: #F06AF3;
-      /* height: 10%; */
-      height: 50px;
-      /* width: 70%; */
-      width: 250px;
-      /* margin-left: 46px; */
-      margin-left: 12%;
+      /* height: 6em; */
+      height: 8em;
+      width: 35em;
       display: flex;
       align-items: center;
       justify-content: center;

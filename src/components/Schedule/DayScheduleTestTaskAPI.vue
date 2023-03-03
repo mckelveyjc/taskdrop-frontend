@@ -9,11 +9,13 @@
         <p class="day-header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(dayName)"></p>
         <p class="day-header-text" v-else>{{dayName}}</p>
 
-        <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
+        <div class="tasks-container">
+          <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
             <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
-        </div>
-        <div v-if="renderDraggedTask">          
-          <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+          </div>
+          <div v-if="renderDraggedTask">          
+            <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+          </div>
         </div>
         <!-- takin these out because I threw time divisions into the backlog -->
         <!-- <div class="timings-container">
@@ -243,8 +245,16 @@ export default {
 
 <style scoped>
   /* @import "../../assets/global.css"; */
+  .tasks-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* border: 2px solid red; */
+  }
   .day-header-text {
-    font-size: 25px;
+    /* font-size: 25px; */
+    font-size: 27px;
   }
   .time-division {
     margin-right: auto;

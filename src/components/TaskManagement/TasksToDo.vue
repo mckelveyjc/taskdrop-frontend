@@ -8,23 +8,24 @@
     <p class="header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(headerMsg)"></p>
     <p class="header-text" v-else>{{headerMsg}}</p>
 
-    <!-- <Task msg="Task #1" completed=False id="1"></Task> -->
-    <!-- <Task msg="Task #2" completed=False id="2"></Task> -->
-    <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
-    <div v-for="taskInfoObject in taskList['toDoListTasks']">
-      <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
-    </div>
-    <!-- to make the below work for multiple tasks, we'll need to make a list of task objects -->
-    <!-- the below works (for now lmao) -->
-    <!-- <div v-if="displayCreatedTaskBoolean">
+    <div class="tasks-container">
+      <!-- <Task msg="Task #1" completed=False id="1"></Task> -->
+      <!-- <Task msg="Task #2" completed=False id="2"></Task> -->
+      <!-- <Task v-bind="updatedProps" v-if="onThisDay"></Task> -->
+      <div v-for="taskInfoObject in taskList['toDoListTasks']">
+        <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+      </div>
+      <!-- to make the below work for multiple tasks, we'll need to make a list of task objects -->
+      <!-- the below works (for now lmao) -->
+      <!-- <div v-if="displayCreatedTaskBoolean">
           <TestTaskAPITask :taskInfoObject=this.createdTaskInfoArray></TestTaskAPITask>
-    </div> -->
+      </div> -->
+      <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
+        <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+      </div>
 
-    <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
-      <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+      <AddTask @newTaskInfo="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask>
     </div>
-
-    <AddTask @newTaskInfo="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask>
     <!-- added the below to test router -->
     <!-- <router-link
       to="/fetch-test"
@@ -269,8 +270,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .header-text {
-    font-size: 25px;
+  .tasks-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* border: 2px solid red; */
+  }
+.header-text {
+    font-size: 27px;
   }
 
   #tasks-todo-header {
@@ -283,7 +291,8 @@ export default {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
     /* height: 82.75%; */
-    height: 68.2%;
+    height: 68.7%;
+    /* height: 50%; */
     display: flex;
     flex-direction: column;
     /* align-items: center; */

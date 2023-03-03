@@ -2,8 +2,8 @@
   <div class="task-management-container">
     <TasksToDo headerMsg="Tasks To Do" :taskList="taskList"/>
     <CompletedTasks msg="Complete Task" :taskList="taskList"/>
-    <BionicReader msg="Bionic Reader"/>
     <Notes msg="View Achievements"/>
+    <BionicReader msg="Bionic Reader"/>
   </div>
 </template>
 
