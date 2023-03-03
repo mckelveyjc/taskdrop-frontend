@@ -84,7 +84,7 @@ export default {
     /* width: 250px; */
     /* height: 10.5em; */
     /* width: 30em; */
-    height: 6em;
+    height: 6.5em;
     width: 23em;
     /* margin-left: 35px; */
     display: flex;

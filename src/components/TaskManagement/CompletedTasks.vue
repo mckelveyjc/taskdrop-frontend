@@ -98,7 +98,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .task-completion-counter {
-    font-size: 28px;
+    font-size: 25px;
     margin-left: 5%;
   }
 .task-management-btn-header {

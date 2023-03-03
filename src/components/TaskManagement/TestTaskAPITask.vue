@@ -114,7 +114,7 @@
       /* height: 6em; */
       /* height: 8em;
       width: 35em; */
-      height: 4em;
+      height: 5.5em;
       width: 25em;
 
       display: flex;
