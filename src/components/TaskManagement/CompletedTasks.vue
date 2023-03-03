@@ -82,7 +82,7 @@ export default {
             this.taskCompletionCounter++;
             if (artReady){
               location.reload();
-              alert("A New Achievement is Ready!");
+              alert("New Achievement Unlocked!");
               this.taskCompletionCounter = 0;
             } 
         })
