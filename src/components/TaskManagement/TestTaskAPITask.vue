@@ -112,8 +112,11 @@
       border-radius: 5px;
       background-color: #F06AF3;
       /* height: 6em; */
-      height: 8em;
-      width: 35em;
+      /* height: 8em;
+      width: 35em; */
+      height: 4em;
+      width: 25em;
+
       display: flex;
       align-items: center;
       justify-content: center;
