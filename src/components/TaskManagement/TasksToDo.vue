@@ -278,6 +278,7 @@ export default {
     /* border: 2px solid red; */
   }
 .header-text {
+    padding-top: 2%;
     font-size: 27px;
   }
 
