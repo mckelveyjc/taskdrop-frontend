@@ -254,6 +254,7 @@ export default {
   }
   .day-header-text {
     /* font-size: 25px; */
+    padding-top: 2%;
     font-size: 27px;
   }
   .time-division {
