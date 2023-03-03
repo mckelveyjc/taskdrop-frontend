@@ -1,17 +1,19 @@
 <!-- since acct creation / login will be first, I'll make ToDoList into a separate template for now-->
 <!-- marking creation of branch reorganize-tasks -->
 <template>
-  <router-view />
+  <ToDoList></ToDoList>
 </template>
 
 <script>
 import { computed } from '@vue/runtime-core'
 import store from './store'
+import ToDoList from './components/ToDoList.vue';
 
 const state = computed(() => store.state)
 
 export default {
   name: 'App',
+  components: { ToDoList}
 }
 </script>
 

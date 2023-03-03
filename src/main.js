@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
 import VueEasyLightbox from 'vue-easy-lightbox';
 import store from './store'
 
@@ -9,4 +8,4 @@ import store from './store'
 let app=createApp(App)
 // app.config.globalProperties.$bionicReaderActive = true;
 store.actions.initializeCount()
-app.use(router).use(VueEasyLightbox).mount('#app')
+app.use(VueEasyLightbox).mount('#app')
