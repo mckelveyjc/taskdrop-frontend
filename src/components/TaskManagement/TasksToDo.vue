@@ -292,7 +292,7 @@ export default {
     border-radius: 15px;
     /* height: 82.75%; */
     /* height: 68.7%; */
-    height: 66%;
+    height: 67%;
     /* height: 50%; */
     display: flex;
     flex-direction: column;
