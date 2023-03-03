@@ -291,7 +291,8 @@ export default {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
     /* height: 82.75%; */
-    height: 68.7%;
+    /* height: 68.7%; */
+    height: 66%;
     /* height: 50%; */
     display: flex;
     flex-direction: column;

@@ -102,7 +102,7 @@ export default {
     margin-left: 5%;
   }
 .task-management-btn-header {
-    font-size: 32px;
+    font-size: 25px;
   }
 
   #completed-tasks-header {
