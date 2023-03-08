@@ -1,19 +1,8 @@
 <template>
   <div class="todo-list-container">
     <h1>{{ msg }}</h1>
-    <!-- don't need to push the entire dictionary of data to the below two containers
-    will fix this eventually -->
-    <!-- <AchievementsCarousel v-if="achievementsClicked"></AchievementsCarousel>
-    <TaskManagementContainer :taskList="taskList"/> 
-    <ScheduleContainer :taskList="taskList"/> -->
-    <!-- <AchievementsCarousel></AchievementsCarousel> -->
     <TaskManagementContainer :taskList="taskList"/> 
     <ScheduleContainer :taskList="taskList"/>
-    <!-- use the below in a min! -->
-    <!-- <div v-for="task in taskList">
-      {{ task }}
-    </div> -->
-    <!-- <LeftToolBar /> -->
   </div>
 </template>
 
@@ -22,7 +11,6 @@ import axios from 'axios'
 import TaskManagementContainer from './TaskManagement/TaskManagementContainer.vue';
 import ScheduleContainer from './Schedule/ScheduleContainer.vue';
 import AchievementsCarousel from './TaskManagement/AchievementsCarousel.vue';
-// import LeftToolBar from './ToolBar/LeftToolBar.vue';
 
 export default {
   name: 'ToDoList',
@@ -35,8 +23,6 @@ export default {
       opened: false,
       visible: false,
       achievementsClicked: Boolean,
-      // taskList: [],
-      // taskList should look something like this:
       taskList: {
         testdayTasks: [],
         mondayTasks: [],
@@ -56,11 +42,7 @@ export default {
         const path = 'http://157.230.93.52/get-tasks'
         await axios.post(path, {})
         .then(response => {
-          // console.log(response);
           for (let index = 0; index < response.data.length; index++){
-            // this.taskList.push(response.data[index])
-            // console.log("task: " + response.data[index])
-            // console.log("task: " + response.data[index][3])
             switch(response.data[index][3]) { // the day is at response.data[index][3]
               case "testday":
                 this.taskList['testdayTasks'].push(response.data[index])
@@ -95,34 +77,18 @@ export default {
         .catch(err =>{
           console.log(err);
         });
-        
-        // const path = 'http://157.230.93.52/get-tasks'
-        // axios.post(path, {})
-        // .then(response => {
-        //   console.log(response);
-        // })
-        // .catch(err =>{
-        //   console.log(err);
-        // });
       },
   },
   components: {
     TaskManagementContainer,
     ScheduleContainer,
     AchievementsCarousel,
-    // LeftToolBar,
   }
 }
 </script>
 
 <style scoped>
-  #overlay {
-    position: absolute;
-    border: 2px solid red;
-    height: 100vh;
-    width: 100vh
-  }
-.todo-list-container {
+  .todo-list-container {
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;

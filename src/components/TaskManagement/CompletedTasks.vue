@@ -4,7 +4,6 @@
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-    <!-- <h1 id="completed-tasks-header">{{ msg }}</h1> -->
     <p class="task-management-btn-header" v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
     <p class="task-management-btn-header" v-else>{{msg}}</p>
     <p class="task-completion-counter">{{this.taskCompletionCounter}}/5</p>
@@ -28,8 +27,7 @@ export default {
   },
   async created() {
     this.draggedTaskInfoObject = {};
-    // this.taskCompletionCounter = 0; // should get the # from the database here instead
-    this.taskCompletionCounter = 1; // should get the # from the database here instead
+    this.taskCompletionCounter = 1; // eventually will get the # from the database here instead
     this.getNumCompletedTasks()
   },
   data() {
@@ -58,8 +56,6 @@ export default {
         });
     },
     onDrop(evt) {
-        // I have no idea why the below line isn't working even though it works in DayScheduleTestTaskAPI
-        // this.draggedTaskInfoObject = evt.dataTransfer.getData('task-info-object').split(",");
         var draggedTaskInfoArray = evt.dataTransfer.getData('task-info-object').split(",");
         var taskID = draggedTaskInfoArray[0];
         var taskUser = draggedTaskInfoArray[1];
@@ -89,7 +85,6 @@ export default {
         .catch(err =>{
             console.log(err);
         });
-        this.renderThis = false;
     },
     }
 }
@@ -101,21 +96,16 @@ export default {
     font-size: 25px;
     margin-left: 5%;
   }
-.task-management-btn-header {
+  .task-management-btn-header {
     font-size: 25px;
   }
 
-  #completed-tasks-header {
-    font-size: x-large;
-  }
   .completed-tasks-container {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
     height: 10%;
-    /* height: 20%; */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-top: 4px; */
   }
 </style>

@@ -1,9 +1,7 @@
 <template>
   <div 
     class="task-container" 
-    @click="createTask($event)">
-    <!-- <h1 >{{ msg }}</h1> -->
-    <!-- <p class="task-text" v-html="bionicReading(msg)"></p> -->    
+    @click="createTask($event)">  
     <p v-if="this.bionicReaderStatus" class="task-text" v-html="bionicReading(msg)"></p>
     <p v-else class="task-text" v-html="msg"></p>
   </div>
@@ -12,19 +10,17 @@
 <script>
 import { bionicReading } from 'bionic-reading';
 import axios from 'axios'
-import Task from './Task.vue';
 import TestTaskAPITask from './TestTaskAPITask.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 
 export default {
-  name: 'Task',
+  name: 'AddTask',
   props: {
     msg: String,
     completed: Boolean,
   },
   components: {
-    Task,
     TestTaskAPITask
   },
   setup() {
@@ -35,34 +31,17 @@ export default {
     }
   },
   methods: {
-    // yee yee ! 
     async createTask() {
-      // this.$emit('clicked', 'someValue')
       const path = 'http://157.230.93.52/update-task/create-task'
       await axios.post(path, {
         "taskUser": "1" // when we have multiple user's we'll need a way to change this value
       })
       .then(response => {
         this.$emit('newTaskInfo', {"taskUser": "1", "taskID": response.data})
-        // console.log(response);
-        // console.log("response data: " + response.data);
       })
       .catch(err =>{
         console.log(err);
       });
-
-      // for now, each task is given a random id
-
-      // console.log("NEW TASK! (yee yeeeeee)");
-      // let NewTask = createApp(Task, {msg: "(new task)", id: Math.floor(Math.random() * 1000)});
-      // const wrapper = document.createElement("div");
-      // NewTask.mount(wrapper);
-      // // document.body.appendChild(wrapper);
-
-      // let tasksToDoHeader = document.getElementById("tasks-todo-header");
-      // tasksToDoHeader.insertBefore(wrapper, tasksToDoHeader.firstElementChild);
-      // // have a list of tasks in localstorage that looks like this
-      // // [[msg, day], [msg, day], [msg, day]]
     },
   }
 }
