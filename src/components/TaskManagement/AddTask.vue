@@ -50,22 +50,14 @@ export default {
 <style scoped>
   /* make the below a global style eventually */
   .task-text {
-    /* font-size: 20px; */
     font-size: 25px;
   }
   .task-container {
     color: black;
     border-radius: 5px;
     background-color:#7DF36A;
-    /* height: 10%; */
-    /* height: 50px; */
-    /* width: 70%; */
-    /* width: 250px; */
-    /* height: 10.5em; */
-    /* width: 30em; */
     height: 6.5em;
     width: 23em;
-    /* margin-left: 35px; */
     display: flex;
     align-items: center;
     justify-content: center;
