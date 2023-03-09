@@ -80,6 +80,7 @@
   </script>
   
   <style scoped>
+    /* globalize */
     .task-text {
       font-size: 25px;
     }

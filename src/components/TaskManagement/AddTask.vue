@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-  /* make the below a global style eventually */
+  /* globalize */
   .task-text {
     font-size: 25px;
   }

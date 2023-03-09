@@ -1,12 +1,12 @@
 <template>
     <div 
       @click="toggleBionicReaderFunction"
-      class="completed-tasks-container">
-      <p class="task-management-btn-header" v-html="bionicReading(msg)"></p>
+      class="utilities-button-container">
+      <p class="standard-text" v-html="bionicReading(msg)"></p>
     </div>
   </template>
   
-  <script>  
+<script>  
   import store from '../../store'
   import { computed } from '@vue/runtime-core'
   import { bionicReading } from 'bionic-reading';
@@ -15,6 +15,11 @@
     name: 'BionicReader',
     props: {
       msg: String
+    },
+    methods: {
+      toggleBionicReader() {
+        config.globalProperties.$bionicReaderActive = false;
+      }
     },
     setup(){
       const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
@@ -27,29 +32,9 @@
         bionicReading
       }
     },
-    methods: {
-      toggleBionicReader() {
-        config.globalProperties.$bionicReaderActive = false;
-      }
-    },
-    computed: {}   
   }
-  </script>
+</script>
   
-  <style scoped>
-    .task-management-btn-header {
-      font-size: 25px;
-    }
-
-    #completed-tasks-header {
-      font-size: x-large;
-    }
-    .completed-tasks-container {
-      border: .001px solid #F5F5F5;
-      border-radius: 15px;
-      height: 10%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  </style>
+<style>
+  @import "../../assets/global.css";
+</style>

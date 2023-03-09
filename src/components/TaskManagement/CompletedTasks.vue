@@ -92,14 +92,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  /* globalize */
   .task-completion-counter {
     font-size: 25px;
     margin-left: 5%;
   }
+  /* globalize */
   .task-management-btn-header {
     font-size: 25px;
   }
-
+  /* globalize */
   .completed-tasks-container {
     border: .001px solid #F5F5F5;
     border-radius: 15px;
