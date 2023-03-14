@@ -23,7 +23,6 @@
 <script>
 import AddTask from './AddTask.vue';
 import TestTaskAPITask from './TestTaskAPITask.vue';
-import { createApp } from "vue"
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';

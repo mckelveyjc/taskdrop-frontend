@@ -1,21 +1,22 @@
 <template>
   <div 
-    class="completed-tasks-container" 
+    class="utilities-button-container" 
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-    <p class="task-management-btn-header" v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
-    <p class="task-management-btn-header" v-else>{{msg}}</p>
-    <p class="task-completion-counter">{{this.taskCompletionCounter}}/5</p>
+    <!-- displays bionic text only if global bionic state variable is set to True -->
+    <p class="standard-text" v-if="this.bionicReaderStatus" v-html="bionicReading(msg)"></p>
+    <p class="standard-text" v-else>{{msg}}</p>
+    <p class="standard-text" id="task-completion-counter">{{this.taskCompletionCounter}}/5</p>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import DayScheduleTestTaskAPI from '../Schedule/DayScheduleTestTaskAPI.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
+import axios from 'axios'
+import DayScheduleTestTaskAPI from '../Schedule/DayScheduleTestTaskAPI.vue';
 
 export default {
   name: 'CompletedTasks',
@@ -25,16 +26,15 @@ export default {
   components: {
     DayScheduleTestTaskAPI
   },
-  async created() {
-    this.draggedTaskInfoObject = {};
-    this.taskCompletionCounter = 1; // eventually will get the # from the database here instead
-    this.getNumCompletedTasks()
-  },
   data() {
     return {
       draggedTaskInfoObject: Object,
       taskCompletionCounter: Number
     };
+  },
+  async created() {
+    this.draggedTaskInfoObject = {};
+    this.getNumCompletedTasks()
   },
   setup() {
     const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
@@ -44,6 +44,7 @@ export default {
     }
   },
   methods: {
+    // gets number of completed tasks to populate counter
     async getNumCompletedTasks() {
       const path = 'http://157.230.93.52/get-tasks/get-num-completed'
         await axios.post(path, {})
@@ -55,6 +56,8 @@ export default {
             console.log(err);
         });
     },
+    // gets data from dropped task and actives the "complete-task" service
+    // if an achievement has been generated, alerts the user
     onDrop(evt) {
         var draggedTaskInfoArray = evt.dataTransfer.getData('task-info-object').split(",");
         var taskID = draggedTaskInfoArray[0];
@@ -90,24 +93,9 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /* globalize */
-  .task-completion-counter {
-    font-size: 25px;
+  @import "../../assets/global.css";
+  #task-completion-counter {
     margin-left: 5%;
-  }
-  /* globalize */
-  .task-management-btn-header {
-    font-size: 25px;
-  }
-  /* globalize */
-  .completed-tasks-container {
-    border: .001px solid #F5F5F5;
-    border-radius: 15px;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 </style>

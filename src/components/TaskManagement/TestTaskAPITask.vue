@@ -1,12 +1,12 @@
 <template>
     <div
-      class="task-container"
+      class="task-container-template"
+      id="task-container"
       draggable="true"
       @dragstart="startDrag($event)">
-      <span class="task-text"
+      <span class="standard-text"
         contenteditable
-        @input="updateContent($event, this.taskInfoArray[0])"
-        >
+        @input="updateContent($event, this.taskInfoArray[0])">
           <span v-if="this.bionicReaderStatus" v-html="bionicReading(this.taskInfoArray[2])"></span>
           <span v-else v-html="this.taskInfoArray[2]"></span>
       </span>
@@ -81,19 +81,10 @@
   
   <style scoped>
     /* globalize */
-    .task-text {
-      font-size: 25px;
-    }
-    .task-container {
-      font-size: 10px;
-      color: black;
-      border-radius: 5px;
+    @import "../../assets/global.css";
+    #task-container {
       background-color: #F06AF3;
       height: 5.5em;
       width: 25em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 5px;
     }
   </style>

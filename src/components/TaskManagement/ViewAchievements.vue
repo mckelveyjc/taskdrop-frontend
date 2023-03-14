@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import AchievementsCarousel from './AchievementsCarousel.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
+import AchievementsCarousel from './AchievementsCarousel.vue';
 
 export default {
   name: 'ViewAchievements',

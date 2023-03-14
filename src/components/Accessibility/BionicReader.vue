@@ -16,11 +16,6 @@
     props: {
       msg: String
     },
-    methods: {
-      toggleBionicReader() {
-        config.globalProperties.$bionicReaderActive = false;
-      }
-    },
     setup(){
       const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())
       const toggleBionicReaderFunction = () => {
@@ -30,6 +25,11 @@
         bionicReaderStatus,
         toggleBionicReaderFunction,
         bionicReading
+      }
+    },
+    methods: {
+      toggleBionicReader() {
+        config.globalProperties.$bionicReaderActive = false;
       }
     },
   }

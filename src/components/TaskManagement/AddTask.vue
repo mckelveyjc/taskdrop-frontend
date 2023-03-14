@@ -1,9 +1,9 @@
 <template>
   <div 
-    class="task-container" 
+    class="add-task-container task-container-template"
     @click="createTask($event)">  
-    <p v-if="this.bionicReaderStatus" class="task-text" v-html="bionicReading(msg)"></p>
-    <p v-else class="task-text" v-html="msg"></p>
+    <p v-if="this.bionicReaderStatus" class="standard-text" v-html="bionicReading(msg)"></p>
+    <p v-else class="standard-text" v-html="msg"></p>
   </div>
 </template>
 
@@ -48,19 +48,11 @@ export default {
 </script>
 
 <style scoped>
-  /* globalize */
-  .task-text {
-    font-size: 25px;
-  }
-  .task-container {
-    color: black;
-    border-radius: 5px;
+  @import "../../assets/global.css";
+  /* below should be an ID, not sure why it wasn't working */
+  .add-task-container {
     background-color:#7DF36A;
     height: 6.5em;
     width: 23em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
   }
 </style>
