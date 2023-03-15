@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 
+// sets up a store to keep track of globally toggling the bionic reader
 const store = ({
   state: reactive({
     active: null
