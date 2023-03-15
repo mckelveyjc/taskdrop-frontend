@@ -31,14 +31,16 @@ export default defineComponent({
       visibleRef.value = true
     }
 
+    // loads images into the carousel from the server
     const showMultiple = async () => {
-      // definitely a better way to do this rather than putting a whole fetch request in here
+      // gets url location of AI images in the droplet
+      // probably a better way to do this other than putting a whole fetch request in here
       const path = 'http://157.230.93.52/get-images'
         await axios.post( path, {
           "taskUserID": "1" // make this usable for more than one user eventually
         })
         .then(response => {
-          // add images in reverse order
+          // add images in reverse order so the most recent one shows up first
           for (let i = response["data"]["data"].length - 1; i >= 0; i--){
             imgUrlArray.push(response["data"]["data"][i])
           }

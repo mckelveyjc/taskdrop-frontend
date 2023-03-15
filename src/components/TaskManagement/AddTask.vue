@@ -2,17 +2,18 @@
   <div 
     class="add-task-container task-container-template"
     @click="createTask($event)">  
+    <!-- displays bionic text only if global bionic state variable is set to True -->
     <p v-if="this.bionicReaderStatus" class="standard-text" v-html="bionicReading(msg)"></p>
     <p v-else class="standard-text" v-html="msg"></p>
   </div>
 </template>
 
 <script>
+import store from '../../store'
+import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
 import axios from 'axios'
 import Task from './Task.vue';
-import store from '../../store'
-import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'AddTask',

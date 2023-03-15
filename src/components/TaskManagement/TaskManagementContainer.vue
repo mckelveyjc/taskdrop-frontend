@@ -10,7 +10,6 @@
 <script>
 import TasksToDo from './TasksToDo.vue';
 import CompletedTasks from './CompletedTasks.vue';
-// import Notes from './Notes.vue';
 import ViewAchievements from './ViewAchievements.vue';
 import BionicReader from '../Accessibility/BionicReader.vue';
 
@@ -22,14 +21,12 @@ export default {
   components: {
     TasksToDo,
     CompletedTasks,
-    // Notes,
     ViewAchievements,
     BionicReader
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .task-management-container {
     border-radius: 15px;

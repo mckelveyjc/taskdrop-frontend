@@ -2,15 +2,17 @@
   <div class="tasks-todo-container section-block-border"
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
-    @dragover.prevent
-    id="tasks-todo-container-id">
+    @dragover.prevent>
+    <!-- displays bionic text only if global bionic state variable is set to True -->
     <p class="section-block-header" v-if="this.bionicReaderStatus" v-html="bionicReading(headerMsg)"></p>
     <p class="section-block-header" v-else>{{headerMsg}}</p>
 
     <div class="section-block-display">
+      <!-- renders tasks from the database that are designated for this section -->
       <div v-for="taskInfoObject in taskList['toDoListTasks']">
         <Task :taskInfoObject=taskInfoObject></Task>
       </div>
+      <!-- renders tasks created with the "Add Task" button -->
       <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
         <Task :taskInfoObject=taskInfoObject></Task>
       </div>
@@ -73,7 +75,7 @@ export default {
 <style scoped>
   @import "../../assets/global.css";
   .tasks-todo-container {
-    margin-top: 10px; /* this needs to be globally consistent */
+    margin-top: 10px;
     height: 67%;
     display: flex;
     flex-direction: column;
