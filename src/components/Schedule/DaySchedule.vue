@@ -1,33 +1,37 @@
 <!-- this component is for each day block & the tasks in it  -->
 <template>
   <div 
-    class="day-block-container" 
+    class="day-block-container section-block-border" 
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent>
-        <p class="day-header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(dayName)"></p>
-        <p class="day-header-text" v-else>{{dayName}}</p>
 
-        <div class="tasks-container">
-          <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
-            <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
-          </div>
-          <div v-if="renderDraggedTask">          
-            <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
-          </div>
+      <!-- displays bionic text only if global bionic state variable is set to True -->
+      <p class="section-block-header" v-if="this.bionicReaderStatus" v-html="bionicReading(dayName)"></p>
+      <p class="section-block-header " v-else>{{dayName}}</p>
+
+      <!-- renders each task from the taskList object (from database)-->
+      <div class="section-block-display">
+        <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
+          <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
         </div>
+        <!-- renders any tasks that are dragged into the block -->
+        <div v-if="renderDraggedTask">          
+          <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
+import axios from 'axios'
+import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
 
 export default {
-  name: 'DayScheduleTestTaskAPI',
+  name: 'DaySchedule',
   props: {
       dayName: String,
       taskList: Object
@@ -78,20 +82,8 @@ export default {
 </script>
 
 <style scoped>
-  /* @import "../../assets/global.css"; */
-  .tasks-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .day-header-text {
-    padding-top: 2%;
-    font-size: 27px;
-  }
+  @import "../../assets/global.css";
   .day-block-container {
-    border: .001px solid #F5F5F5;
-    border-radius: 15px;
     width: 35%;
     height: 98%;
     flex-shrink: 0;

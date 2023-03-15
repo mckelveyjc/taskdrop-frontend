@@ -1,13 +1,13 @@
 <template>
-  <div class="tasks-todo-container"
+  <div class="tasks-todo-container section-block-border"
     @drop.prevent="onDrop($event)" 
     @dragenter.prevent 
     @dragover.prevent
     id="tasks-todo-container-id">
-    <p class="header-text" v-if="this.bionicReaderStatus" v-html="bionicReading(headerMsg)"></p>
-    <p class="header-text" v-else>{{headerMsg}}</p>
+    <p class="section-block-header" v-if="this.bionicReaderStatus" v-html="bionicReading(headerMsg)"></p>
+    <p class="section-block-header" v-else>{{headerMsg}}</p>
 
-    <div class="tasks-container">
+    <div class="section-block-display">
       <div v-for="taskInfoObject in taskList['toDoListTasks']">
         <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
       </div>
@@ -71,20 +71,9 @@ export default {
 </script>
 
 <style scoped>
-  .tasks-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .header-text {
-    padding-top: 2%;
-    font-size: 27px;
-  }
+  @import "../../assets/global.css";
   .tasks-todo-container {
     margin-top: 10px; /* this needs to be globally consistent */
-    border: .001px solid #F5F5F5;
-    border-radius: 15px;
     height: 67%;
     display: flex;
     flex-direction: column;

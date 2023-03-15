@@ -18,3 +18,17 @@
     color: black;
     border-radius: 5px;
 }
+.section-block-header {
+    padding-top: 2%;
+    font-size: 27px;
+}
+.section-block-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.section-block-border {
+    border: .001px solid #F5F5F5;
+    border-radius: 15px;
+}

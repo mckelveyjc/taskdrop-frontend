@@ -16,7 +16,7 @@ import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
 import axios from 'axios'
-import DayScheduleTestTaskAPI from '../Schedule/DayScheduleTestTaskAPI.vue';
+import DaySchedule from '../Schedule/DaySchedule.vue';
 
 export default {
   name: 'CompletedTasks',
@@ -24,7 +24,7 @@ export default {
     msg: String
   },
   components: {
-    DayScheduleTestTaskAPI
+    DaySchedule
   },
   data() {
     return {
