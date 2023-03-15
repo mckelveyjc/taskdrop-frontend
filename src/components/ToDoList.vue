@@ -1,27 +1,28 @@
 <template>
   <div class="todo-list-container">
-    <h1>{{ msg }}</h1>
     <TaskManagementContainer :taskList="taskList"/> 
     <ScheduleContainer :taskList="taskList"/>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
 import TaskManagementContainer from './TaskManagement/TaskManagementContainer.vue';
 import ScheduleContainer from './Schedule/ScheduleContainer.vue';
 import AchievementsCarousel from './TaskManagement/AchievementsCarousel.vue';
+import axios from 'axios'
 
 export default {
   name: 'ToDoList',
+  components: {
+    TaskManagementContainer,
+    ScheduleContainer,
+    AchievementsCarousel,
+  },
   created() {
     this.getTasks();
-    this.achievementsClicked = true
   },
   data() {
     return {
-      opened: false,
-      visible: false,
       achievementsClicked: Boolean,
       taskList: {
         testdayTasks: [],
@@ -34,19 +35,17 @@ export default {
         sundayTasks: [],
         toDoListTasks: []
       },
-      erroMsg: "",
     }
   },
   methods:{
+      // gets an object of all the tasks from the database
+      // pushes information for each task to the location corresponding to its location in taskList
       async getTasks(){
         const path = 'http://157.230.93.52/get-tasks'
         await axios.post(path, {})
         .then(response => {
           for (let index = 0; index < response.data.length; index++){
             switch(response.data[index][3]) { // the day is at response.data[index][3]
-              case "testday":
-                this.taskList['testdayTasks'].push(response.data[index])
-                break;
               case "monday":
                 this.taskList['mondayTasks'].push(response.data[index])
                 break;
@@ -79,11 +78,6 @@ export default {
         });
       },
   },
-  components: {
-    TaskManagementContainer,
-    ScheduleContainer,
-    AchievementsCarousel,
-  }
 }
 </script>
 
