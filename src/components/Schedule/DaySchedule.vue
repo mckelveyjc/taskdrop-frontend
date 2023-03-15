@@ -13,11 +13,11 @@
       <!-- renders each task from the taskList object (from database)-->
       <div class="section-block-display">
         <div v-for="taskInfoObject in taskList[dayName.toLowerCase() + 'Tasks']">
-          <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+          <Task :taskInfoObject=taskInfoObject></Task>
         </div>
         <!-- renders any tasks that are dragged into the block -->
         <div v-if="renderDraggedTask">          
-          <TestTaskAPITask :taskInfoObject=this.draggedTaskInfoObject></TestTaskAPITask>
+          <Task :taskInfoObject=this.draggedTaskInfoObject></Task>
         </div>
       </div>
   </div>
@@ -27,8 +27,9 @@
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
+
 import axios from 'axios'
-import TestTaskAPITask from '../TaskManagement/TestTaskAPITask.vue';
+import Task from '../TaskManagement/Task.vue';
 
 export default {
   name: 'DaySchedule',
@@ -37,7 +38,7 @@ export default {
       taskList: Object
   },
   components: {
-    TestTaskAPITask
+    Task
   },
   created() {
         this.renderDraggedTask = false;
@@ -65,6 +66,7 @@ export default {
         this.draggedTaskInfoObject = evt.dataTransfer.getData('task-info-object').split(",");
         const lowerCaseDayName = this.dayName.toLowerCase();
 
+        // call an api that sets the day of the dropped task to this day
         const path = 'http://157.230.93.52/update-task/update-day'
         axios.post(path, {
           "taskID": taskID,

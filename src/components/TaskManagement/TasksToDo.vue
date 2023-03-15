@@ -9,10 +9,10 @@
 
     <div class="section-block-display">
       <div v-for="taskInfoObject in taskList['toDoListTasks']">
-        <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+        <Task :taskInfoObject=taskInfoObject></Task>
       </div>
       <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
-        <TestTaskAPITask :taskInfoObject=taskInfoObject></TestTaskAPITask>
+        <Task :taskInfoObject=taskInfoObject></Task>
       </div>
 
       <AddTask @newTaskInfo="displayCreatedTaskFunction($event)" msg="Add Task" completed=False id="add-task-btn"></AddTask>
@@ -22,7 +22,7 @@
 
 <script>
 import AddTask from './AddTask.vue';
-import TestTaskAPITask from './TestTaskAPITask.vue';
+import Task from './Task.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
@@ -35,7 +35,7 @@ export default {
   },
   components: {
     AddTask,
-    TestTaskAPITask
+    Task
   },
   created() {
         this.displayCreatedTaskBoolean = false,

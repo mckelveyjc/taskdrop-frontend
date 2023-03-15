@@ -10,7 +10,7 @@
 <script>
 import { bionicReading } from 'bionic-reading';
 import axios from 'axios'
-import TestTaskAPITask from './TestTaskAPITask.vue';
+import Task from './Task.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 
@@ -21,7 +21,7 @@ export default {
     completed: Boolean,
   },
   components: {
-    TestTaskAPITask
+    Task
   },
   setup() {
     const bionicReaderStatus = computed(() => store.getters.getBionicReaderStatus())

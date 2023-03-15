@@ -21,7 +21,7 @@
   import { computed } from '@vue/runtime-core'
 
   export default {
-    name: 'TestTaskAPITask',
+    name: 'Task',
     props: {
       taskInfoObject: Object | Array
     },
