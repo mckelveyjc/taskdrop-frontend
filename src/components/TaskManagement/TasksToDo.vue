@@ -12,8 +12,9 @@
       <div v-for="taskInfoObject in taskList['toDoListTasks']">
         <Task :taskInfoObject=taskInfoObject></Task>
       </div>
+
       <!-- renders tasks created with the "Add Task" button -->
-      <div v-if="displayCreatedTaskBoolean" v-for="taskInfoObject in this.createdTaskInfoBigList">
+      <div v-if="displayCreatedTask" v-for="taskInfoObject in this.arrayOfCreatedTasks">
         <Task :taskInfoObject=taskInfoObject></Task>
       </div>
 
@@ -23,11 +24,11 @@
 </template>
 
 <script>
-import AddTask from './AddTask.vue';
-import Task from './Task.vue';
 import store from '../../store'
 import { computed } from '@vue/runtime-core'
 import { bionicReading } from 'bionic-reading';
+import AddTask from './AddTask.vue';
+import Task from './Task.vue';
 
 export default {
   name: 'TasksToDo',
@@ -40,15 +41,15 @@ export default {
     Task
   },
   created() {
-        this.displayCreatedTaskBoolean = false,
-        this.createdTaskInfoArray = [], // needs to be renamed (this is just for one task)
-        this.createdTaskInfoBigList = [] // needs to be renamed (this holds a list of the above)
+        this.displayCreatedTask = false,
+        this.createdTaskInfoArray = [], // info about one created task
+        this.arrayOfCreatedTasks = [] // array of all created tasks
     },
   data() {
       return {
-        displayCreatedTaskBoolean: Boolean,
+        displayCreatedTask: Boolean,
         createdTaskInfoArray: Array,
-        createdTaskInfoBigList: Array
+        arrayOfCreatedTasks: Array
       };
     },
   setup() {
@@ -59,14 +60,13 @@ export default {
     }
   },
   methods: {
+    // when "Add Task" is pressed, this function displays the new task in the section
     displayCreatedTaskFunction(newTaskInfoObject) {
-      this.displayCreatedTaskBoolean = true;
-      console.log("new task info: " + Object.values(newTaskInfoObject));
+      this.displayCreatedTask = true;
       let createdTaskID = Object.values(newTaskInfoObject)[1];
       let createdTaskUserID = Object.values(newTaskInfoObject)[0];
-      // below probably shouldn't be hardcoded in but whatevs
       this.createdTaskInfoArray = [createdTaskID, createdTaskUserID, "(new task)", "to-do-list", "new-task", "new-task"];
-      this.createdTaskInfoBigList.push(this.createdTaskInfoArray)
+      this.arrayOfCreatedTasks.push(this.createdTaskInfoArray)
     },
   },
 }
