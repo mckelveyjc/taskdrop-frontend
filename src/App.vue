@@ -3,21 +3,18 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
-import store from './store'
 import ToDoList from './components/ToDoList.vue';
-
-const state = computed(() => store.state)
 
 export default {
   name: 'App',
-  components: { ToDoList}
+  components: {
+    ToDoList
+  }
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Inter&display=swap');
-
 * {
   margin: 0;
 }
